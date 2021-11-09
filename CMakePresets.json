@@ -1,0 +1,59 @@
+{
+	"version": 2,
+	"configurePresets": [
+		{
+			"name": "base",
+			"description": "Base config",
+			"hidden": true,
+			"generator": "Ninja",
+			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"architecture": {
+				"value": "x64",
+				"strategy": "external"
+			},
+			"cacheVariables": {
+				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+				"CMAKE_C_COMPILER": "clang-cl",
+				"CMAKE_CXX_COMPILER": "clang-cl"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"intelliSenseMode": "windows-clang-x64",
+					"hostOS": [
+						"Windows"
+					]
+				}
+			}
+		},
+		{
+			"name": "x64-Debug-Clang",
+			"displayName": "Windows x64 Debug",
+			"description": "Target Windows with the Clang.",
+			"inherits": "base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
+			"name": "x64-Release-Clang",
+			"displayName": "Windows x64 Debug",
+			"description": "Target Windows with the Clang.",
+			"inherits": "base",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "Debug",
+			"description": "Debug build project using clang",
+			"configurePreset": "x64-Debug-Clang"
+		},
+		{
+			"name": "Release",
+			"description": "Release build project using clang",
+			"configurePreset": "x64-Release-Clang"
+		}
+	]
+}
