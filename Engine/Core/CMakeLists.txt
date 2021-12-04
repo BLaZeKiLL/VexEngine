@@ -2,7 +2,9 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-add_library(VEX_CORE "src/Logger.cpp" "src/Window.cpp" "src/Timer.cpp")
+file(GLOB_RECURSE VEX_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+
+add_library(VEX_CORE ${VEX_CORE_SOURCES})
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
     target_compile_options(VEX_CORE PUBLIC /MTd)
 else()

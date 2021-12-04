@@ -1,4 +1,6 @@
-add_library(VEX_RUNTIME "src/VexEngine.cpp")
+file(GLOB_RECURSE VEX_RUNTIME_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+
+add_library(VEX_RUNTIME ${VEX_RUNTIME_SOURCES})
 
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
     target_compile_options(VEX_RUNTIME PUBLIC /MTd)

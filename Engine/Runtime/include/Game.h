@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core.h"
+
 class Window;
 
 namespace VEX
@@ -7,11 +9,11 @@ namespace VEX
 	class Game
 	{
 	public:
-		virtual void Init() = 0;
-		virtual void Start() = 0;
-		virtual void Input(Window* window) = 0;
-		virtual void Update(float delta) = 0;
-		virtual void Render(Window* window) = 0;
-		virtual void Clean() = 0;
+		virtual void Init() PURE;
+		virtual void Start() PURE;
+		virtual void Input(Window* window) PURE;
+		virtual void Update(float delta) PURE;
+		virtual void Render(Window* window) PURE;
+		virtual void Clean() PURE;
 	};
 }

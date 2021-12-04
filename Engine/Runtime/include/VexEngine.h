@@ -22,8 +22,8 @@ namespace VEX
 		static constexpr int TARGET_FPS = 120;
 		static constexpr int TARGET_UPS = 60;
 	private:
-		const Timer* Timer;
-		const Window* Window;
-		const Game* Game;
+		//const Timer* Timer;
+		//const Window* Window;
+		//const Game* Game;
 	};
 }

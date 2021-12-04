@@ -8,13 +8,13 @@ int main(int, char**)
 	VEX::Logger::Init();
 
 	// string literals in c++ are const char * NOT strings
-	std::string title = "Model Viewer";
+	const std::string title = "Model Viewer";
 
-	auto config = VEX::Window::Config {
+	const auto config = VEX::WindowConfig {
 		title, 1280, 720, false
 	};
 
-	auto window = new VEX::Window(config);
+	const auto window = new VEX::Window(config);
 
 	window->Init();
 
