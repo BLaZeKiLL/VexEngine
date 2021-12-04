@@ -8,7 +8,7 @@
 
 namespace VEX
 {
-	Window::Window(const Config& Config) : _Config(Config)
+	Window::Window(const WindowConfig& Config) : _Config(Config)
 	{
 	}
 

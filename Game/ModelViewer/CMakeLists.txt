@@ -6,4 +6,4 @@ else()
     target_compile_options(ModelViewer PUBLIC /MT)
 endif()
 
-target_link_libraries(ModelViewer PRIVATE VEX_CORE)
+target_link_libraries(ModelViewer PRIVATE VEX_RUNTIME)

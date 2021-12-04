@@ -2,22 +2,22 @@
 
 #include <string>
 
-class GLFWwindow;
+struct GLFWwindow;
 
 namespace VEX
 {
+	struct WindowConfig
+	{
+		const std::string& Title;
+		const int Width;
+		const int Height;
+		const bool FullScreen;
+	};
+
 	class Window
 	{
 	public:
-		struct Config
-		{
-			const std::string& Title;
-			const int Width;
-			const int Height;
-			const bool FullScreen;
-		};
-
-		Window(const Config& Config);
+		Window(const WindowConfig& Config);
 		~Window();
 
 		void Init();
@@ -27,7 +27,7 @@ namespace VEX
 		bool ShouldClose();
 		bool IsKeyPressed(int key);
 	private:
-		Config _Config;
+		WindowConfig _Config;
 		GLFWwindow* _Window;
 
 		static void ResizeCallback(GLFWwindow* window, int width, int height);

@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Include sub-projects.
 
 # Engine
-add_subdirectory(Engine)
+add_subdirectory("Engine")
 
 # Games
-add_subdirectory(Game/ModelViewer)
+add_subdirectory("Game/ModelViewer")
