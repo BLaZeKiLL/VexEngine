@@ -2,10 +2,10 @@
 
 #include "Core.h"
 
-class Window;
-
 namespace VEX
 {
+	class Window;
+
 	class Game
 	{
 	public:

@@ -1,29 +1,44 @@
 #pragma once
 
-struct WindowConfig;
-
-class Timer;
-class Window;
-class Game;
+#include <thread>
 
 namespace VEX
 {
+	class Timer;
+	class Window;
+	class Game;
+
+	struct WindowConfig;
+
 	struct VexEngineConfig
 	{
 		const WindowConfig& WindowConfig;
-		const Game* Game;
+		Game* Game;
 	};
 
 	class VexEngine
 	{
 	public:
-		VexEngine();
+		VexEngine(const VexEngineConfig& Config);
+		~VexEngine();
 
 		static constexpr int TARGET_FPS = 120;
 		static constexpr int TARGET_UPS = 60;
+
+		void Start();
+
 	private:
-		//const Timer* Timer;
-		//const Window* Window;
-		//const Game* Game;
+		Game* Game;
+
+		Window* Window;
+		Timer* Timer;
+
+		std::thread GameThread;
+
+		void GameThreadRun() const;
+
+		void Init() const;
+		void Loop() const;
+		void Clean() const;
 	};
 }

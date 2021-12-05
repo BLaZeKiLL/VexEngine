@@ -1,35 +1,24 @@
 #include "Core.h"
+#include "Runtime.h"
 
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include "ModelViewer.h"
 
 int main(int, char**)
 {
-	VEX::Logger::Init();
-
 	// string literals in c++ are const char * NOT strings
 	const std::string title = "Model Viewer";
 
-	const auto config = VEX::WindowConfig {
+	const auto windowConfig = VEX::WindowConfig {
 		title, 1280, 720, false
 	};
 
-	const auto window = new VEX::Window(config);
+	const auto game = new ModelViewer();
 
-	window->Init();
+	const auto engine = new VEX::VexEngine(VEX::VexEngineConfig {windowConfig, game});
 
-	while (!window->ShouldClose())
-	{
-		if (window->IsKeyPressed(GLFW_KEY_ESCAPE)) {
-			window->Close();
-		}
+	engine->Start();
 
-		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	delete engine;
 
-		window->Update();
-	}
-
-	delete window;
 	return 0;
 }

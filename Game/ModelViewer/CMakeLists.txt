@@ -8,4 +8,6 @@ else()
     target_compile_options(ModelViewer PUBLIC /MT)
 endif()
 
+target_include_directories(ModelViewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 target_link_libraries(ModelViewer PRIVATE VEX_RUNTIME)

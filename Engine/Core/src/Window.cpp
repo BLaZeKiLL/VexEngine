@@ -8,7 +8,7 @@
 
 namespace VEX
 {
-	Window::Window(const WindowConfig& Config) : _Config(Config)
+	Window::Window(const WindowConfig& Config) : Config(Config)
 	{
 	}
 
@@ -35,9 +35,9 @@ namespace VEX
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
 		_Window = glfwCreateWindow(
-			_Config.Width,
-			_Config.Height,
-			_Config.Title.c_str(), _Config.FullScreen ? glfwGetPrimaryMonitor() : nullptr,
+			Config.Width,
+			Config.Height,
+			Config.Title.c_str(), Config.FullScreen ? glfwGetPrimaryMonitor() : nullptr,
 			nullptr
 		);
 
@@ -58,29 +58,26 @@ namespace VEX
 		if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
 		{
 			VEX_LOG_ERROR("Failed To Initialize GLAD");
-			return;
 		}
-
-		VEX_LOG_INFO("OpenGL 3.3 Initialized");
 	}
 
-	void Window::Update()
+	void Window::Update() const
 	{
 		glfwSwapBuffers(_Window);
 		glfwPollEvents();
 	}
 
-	void Window::Close()
+	void Window::Close() const
 	{
 		glfwSetWindowShouldClose(_Window, GLFW_TRUE);
 	}
 
-	bool Window::ShouldClose()
+	bool Window::ShouldClose() const
 	{
 		return glfwWindowShouldClose(_Window);
 	}
 
-	bool Window::IsKeyPressed(int key)
+	bool Window::IsKeyPressed(const int key) const
 	{
 		return glfwGetKey(_Window, key) == GLFW_PRESS;
 	}

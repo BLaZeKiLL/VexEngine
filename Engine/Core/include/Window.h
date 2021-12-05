@@ -21,13 +21,13 @@ namespace VEX
 		~Window();
 
 		void Init();
-		void Update();
+		void Update() const;
 
-		void Close();
-		bool ShouldClose();
-		bool IsKeyPressed(int key);
+		void Close() const;
+		bool ShouldClose() const;
+		bool IsKeyPressed(int key) const;
 	private:
-		WindowConfig _Config;
+		WindowConfig Config;
 		GLFWwindow* _Window;
 
 		static void ResizeCallback(GLFWwindow* window, int width, int height);

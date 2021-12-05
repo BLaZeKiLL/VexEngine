@@ -6,3 +6,8 @@
 
 #include "Logger.h"
 #include "Window.h"
+#include "Timer.h"
+
+// LIBS
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
