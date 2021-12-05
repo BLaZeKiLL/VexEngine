@@ -10,7 +10,7 @@ namespace VEX
 		Window(new VEX::Window(Config.WindowConfig)),
 		Timer(new VEX::Timer())
 	{
-		Logger::Init();
+		Logger::Init(Config.WindowConfig.Title);
 	}
 
 	VexEngine::~VexEngine()

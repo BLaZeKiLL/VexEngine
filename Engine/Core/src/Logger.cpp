@@ -4,12 +4,17 @@
 
 namespace VEX
 {
-	std::shared_ptr<spdlog::logger> Logger::s_Logger;
+	std::shared_ptr<spdlog::logger> Logger::EngineLogger;
+	std::shared_ptr<spdlog::logger> Logger::GameLogger;
 
-	void Logger::Init()
+	void Logger::Init(const std::string& name)
 	{
 		spdlog::set_pattern("%^[%n][%T][%4!l]%$ : %v");
-		s_Logger = spdlog::stdout_color_mt("VEX");
-		s_Logger->set_level(spdlog::level::trace);
+
+		EngineLogger = spdlog::stdout_color_mt("VEX");
+		EngineLogger->set_level(spdlog::level::trace);
+
+		GameLogger = spdlog::stdout_color_mt(name);
+		GameLogger->set_level(spdlog::level::trace);
 	}
 }
