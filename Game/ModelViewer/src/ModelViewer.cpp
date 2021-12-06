@@ -21,6 +21,7 @@ void ModelViewer::Input(VEX::Window* window)
 
 void ModelViewer::Update(float delta)
 {
+	//GAME_LOG_INFO("UPDATE: {}", delta);
 }
 
 void ModelViewer::Render(VEX::Window* window)

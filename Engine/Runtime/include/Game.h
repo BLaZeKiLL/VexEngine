@@ -9,6 +9,8 @@ namespace VEX
 	class Game
 	{
 	public:
+		virtual ~Game() = default;
+
 		virtual void Init() PURE;
 		virtual void Start() PURE;
 		virtual void Input(Window* window) PURE;

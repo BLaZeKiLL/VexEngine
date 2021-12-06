@@ -2,7 +2,7 @@
 
 #include "Runtime.h"
 
-class ModelViewer : public VEX::Game
+class ModelViewer final : public VEX::Game
 {
 protected:
 	void Init() override;

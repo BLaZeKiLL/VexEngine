@@ -8,13 +8,12 @@ int main(int, char**)
 	// string literals in c++ are const char * NOT strings
 	const std::string title = "Model Viewer";
 
-	const auto windowConfig = VEX::WindowConfig {
-		title, 1280, 720, false
-	};
-
-	const auto game = new ModelViewer();
-
-	const auto engine = new VEX::VexEngine(VEX::VexEngineConfig {windowConfig, game});
+	const auto engine = new VEX::VexEngine(
+		VEX::VexEngineConfig {
+			VEX::WindowConfig { title, 1280, 720, false},
+			new ModelViewer()
+		}
+	);
 
 	engine->Start();
 
