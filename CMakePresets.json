@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "x64-Debug-Clang",
-			"displayName": "Windows x64 Debug",
+			"displayName": "Windows Clang x64 Debug",
 			"description": "Target Windows with the Clang.",
 			"inherits": "base",
 			"cacheVariables": {
@@ -36,7 +36,7 @@
 		},
 		{
 			"name": "x64-Release-Clang",
-			"displayName": "Windows x64 Release",
+			"displayName": "Windows Clang x64 Release",
 			"description": "Target Windows with the Clang.",
 			"inherits": "base",
 			"cacheVariables": {
