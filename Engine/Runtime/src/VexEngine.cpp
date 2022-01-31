@@ -1,6 +1,7 @@
 #include "VexEngine.h"
 
-#include "Core.h"
+#include "Vex/Core.h"
+
 #include "Game.h"
 
 namespace VEX

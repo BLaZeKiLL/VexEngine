@@ -1,6 +1,6 @@
 #include "ModelViewer.h"
 
-#include "Core.h"
+#include "Vex/Core.h"
 
 void ModelViewer::Init() // Resource Loading
 {

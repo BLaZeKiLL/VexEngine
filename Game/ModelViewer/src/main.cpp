@@ -1,5 +1,5 @@
-#include "Core.h"
-#include "Runtime.h"
+#include "Vex/Core.h"
+#include "Vex/Runtime.h"
 
 #include "ModelViewer.h"
 
