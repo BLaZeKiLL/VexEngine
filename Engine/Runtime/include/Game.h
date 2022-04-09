@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vex/Core.h"
+#include "Vex/Minimal.h"
 
 namespace VEX
 {
@@ -15,7 +15,7 @@ namespace VEX
 		virtual void Start() PURE;
 		virtual void Input(Window* window) PURE;
 		virtual void Update(float delta) PURE;
-		virtual void Render(Window* window) PURE;
+		virtual void Render() PURE;
 		virtual void Clean() PURE;
 	};
 }

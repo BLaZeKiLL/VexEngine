@@ -1,5 +1,6 @@
 #include "ModelViewer.h"
 
+#include "Vex/Libs.h"
 #include "Vex/Core.h"
 
 void ModelViewer::Init() // Resource Loading
@@ -24,10 +25,9 @@ void ModelViewer::Update(float delta)
 	//GAME_LOG_INFO("UPDATE: {}", delta);
 }
 
-void ModelViewer::Render(VEX::Window* window)
+void ModelViewer::Render()
 {
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+
 }
 
 void ModelViewer::Clean()

@@ -7,16 +7,19 @@ namespace VEX
 	class Timer;
 	class Window;
 	class Game;
+	class VexRenderer;
 
 	struct WindowConfig;
+	struct RendererConfig;
 
 	struct VexEngineConfig
 	{
 		const WindowConfig& WindowConfig;
+		const RendererConfig& RendererConfig;
 		Game* Game;
 	};
 
-	class VexEngine
+	class VexEngine final
 	{
 	public:
 		VexEngine(const VexEngineConfig& Config);
@@ -29,7 +32,7 @@ namespace VEX
 
 	private:
 		Game* Game;
-
+		VexRenderer* Renderer;
 		Window* Window;
 		Timer* Timer;
 

@@ -1,13 +1,14 @@
-#include "VexEngine.h"
-
 #include "Vex/Core.h"
+#include "Vex/Renderer.h"
 
+#include "VexEngine.h"
 #include "Game.h"
 
 namespace VEX
 {
 	VexEngine::VexEngine(const VexEngineConfig& Config) :
 		Game(Config.Game),
+		Renderer(new VexRenderer(Config.RendererConfig)),
 		Window(new VEX::Window(Config.WindowConfig)),
 		Timer(new VEX::Timer())
 	{
@@ -40,6 +41,7 @@ namespace VEX
 		VEX_LOG_INFO("OpenGL 3.3 Initialized");
 
 		Timer->Init();
+		Renderer->Init();
 
 		VEX_LOG_INFO("Vex Engine Initialized");
 
@@ -67,7 +69,7 @@ namespace VEX
 				accumulator -= interval;
 			}
 
-			Game->Render(Window);
+			Renderer->Render();
 			Window->Update();
 		}
 	}
@@ -79,6 +81,8 @@ namespace VEX
 		VEX_LOG_INFO("Game Clean Up");
 
 		delete Window;
+		delete Renderer;
+		delete Timer;
 
 		VEX_LOG_INFO("Vex Engine Clean Up");
 	}
