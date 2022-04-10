@@ -1,20 +1,19 @@
-#define GLFW_INCLUDE_NONE
-
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include "CoreLibs.h"
 
 #include "Window.h"
 #include "Logger.h"
 
+#include "Platform/Platform.h"
+
 namespace VEX
 {
-	Window::Window(const WindowConfig& Config) : Config(Config)
+	Window::Window(const WindowConfig& Config) : m_Config(Config)
 	{
 	}
 
 	Window::~Window()
 	{
-		glfwDestroyWindow(_Window);
+		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 	}
 
@@ -29,61 +28,51 @@ namespace VEX
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-		_Window = glfwCreateWindow(
-			Config.Width,
-			Config.Height,
-			Config.Title.c_str(), Config.FullScreen ? glfwGetPrimaryMonitor() : nullptr,
+		m_Window = glfwCreateWindow(
+			m_Config.Width,
+			m_Config.Height,
+			m_Config.Title.c_str(), m_Config.FullScreen ? glfwGetPrimaryMonitor() : nullptr,
 			nullptr
 		);
 
-		if (!_Window)
+		if (!m_Window)
 		{
 			VEX_LOG_ERROR("GLFW Failed To Create A Window");
 			return;
 		}
 
-		glfwSetFramebufferSizeCallback(_Window, Window::ResizeCallback);
-
-		glfwMakeContextCurrent(_Window);
+		glfwMakeContextCurrent(m_Window);
 
 		glfwSwapInterval(1); // V-Sync
 
-		glfwShowWindow(_Window);
+		glfwShowWindow(m_Window);
 
-		if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
-		{
-			VEX_LOG_ERROR("Failed To Initialize GLAD");
-		}
+		InitializePlatform(Platform::OPENGL, m_Window);
 	}
 
 	void Window::Update() const
 	{
-		glfwSwapBuffers(_Window);
+		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}
 
 	void Window::Close() const
 	{
-		glfwSetWindowShouldClose(_Window, GLFW_TRUE);
+		glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
 	}
 
 	bool Window::ShouldClose() const
 	{
-		return glfwWindowShouldClose(_Window);
+		return glfwWindowShouldClose(m_Window);
 	}
 
 	bool Window::IsKeyPressed(const int key) const
 	{
-		return glfwGetKey(_Window, key) == GLFW_PRESS;
-	}
-
-	void Window::ResizeCallback(GLFWwindow* window, int width, int height)
-	{
-		glViewport(0, 0, width, height);
+		return glfwGetKey(m_Window, key) == GLFW_PRESS;
 	}
 }

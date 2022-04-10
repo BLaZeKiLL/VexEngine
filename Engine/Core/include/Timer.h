@@ -4,12 +4,11 @@ namespace VEX
 {
 	class Timer
 	{
+	private:
+		double m_LastLoopTime;
 	public:
 		void Init();
-		double GetTime();
+		double GetTime() const;
 		float GetElapsedTime();
-
-	private:
-		double _LastLoopTime;
 	};
 }

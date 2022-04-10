@@ -1,26 +1,48 @@
 #include "Vex/Libs.h"
 #include "Vex/Core.h"
-#include "Vex/Resource.h"
-
-#include "GLContext.h"
+#include "Vex/Platform.h"
 
 #include "VexRenderer.h"
 
 namespace VEX
 {
-	VexRenderer::VexRenderer(const RendererConfig& config) :
-	Config(config),
-	GraphicsContext(new GLContext())
+	VexRenderer::VexRenderer(const RendererConfig& config) : m_Config(config)
 	{
 	}
 
 	VexRenderer::~VexRenderer()
 	{
-		delete GraphicsContext;
+		delete m_VB;
+		delete m_IB;
+		delete m_VA;
 	}
 
-	void VexRenderer::Init() const
+	void VexRenderer::Init()
 	{
+		const glm::vec2 positions[] = {
+			glm::vec2(-0.5f, -0.5f),
+			glm::vec2(-0.5f, 0.5f),
+			glm::vec2(0.5f, -0.5f),
+			glm::vec2(0.5f, 0.5f),
+		};
+
+		const unsigned int indices[] = {
+			0, 1, 2,
+			2, 1, 3
+		};
+
+		m_VA = new VertexArray();
+
+		m_VB = new VertexBuffer(positions, 4 * sizeof(glm::vec2));
+
+		VertexBufferLayout layout;
+
+		layout.Push<float>(2);
+
+		m_VA->AddBuffer(m_VB, layout);
+
+		m_IB = new IndexBuffer(indices, 6);
+
 		VEX_LOG_INFO("Renderer Initialized");
 	}
 
@@ -28,22 +50,15 @@ namespace VEX
 	{
 		// Prepare
 		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(Config.ClearColor.r, Config.ClearColor.g, Config.ClearColor.b, Config.ClearColor.a);
-	}
+		glClearColor(m_Config.ClearColor.r, m_Config.ClearColor.g, m_Config.ClearColor.b, m_Config.ClearColor.a);
 
-	void VexRenderer::LoadMesh(Mesh& mesh) const
-	{
-		const auto vao = GraphicsContext->CreateVao();
-		const auto vbo = GraphicsContext->CreateVbo();
-		const auto ibo = GraphicsContext->CreateIbo();
+		// Render
+		m_VA->Bind();
+		m_IB->Bind();
 
-		GraphicsContext->BindVao(vao);
+		glDrawElements(GL_TRIANGLES, m_IB->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-		GraphicsContext->SetDataBuffer(vbo, 0, mesh.vertices.size() * sizeof(glm::vec3), &mesh.vertices[0]);
-		GraphicsContext->SetIndexBuffer(ibo, mesh.indices.size() * sizeof(unsigned int), &mesh.indices[0]);
-
-		mesh.id = vao;
-
-		GraphicsContext->BindVao(0);
+		m_IB->Unbind();
+		m_VA->Unbind();
 	}
 }

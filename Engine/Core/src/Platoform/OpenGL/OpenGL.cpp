@@ -1,0 +1,46 @@
+#include "CoreLibs.h"
+
+#include "Logger.h"
+#include "Platform/OpenGL/OpenGL.h"
+
+bool VEX::InitializeOpenGL(GLFWwindow* window)
+{
+	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
+	{
+		VEX_LOG_ERROR("Failed To Initialize GLAD");
+		return false;
+	}
+
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(MessageCallback, nullptr);
+
+	glfwSetFramebufferSizeCallback(window, ResizeCallback);
+
+	VEX_LOG_INFO("OpenGL 4.5 Initialized");
+
+	return true;
+}
+
+void VEX::ResizeCallback(GLFWwindow* window, const int width, const int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+void VEX::MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* param)
+{
+	switch (severity)
+	{
+	case GL_DEBUG_SEVERITY_HIGH:
+		VEX_LOG_ERROR("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		break;
+	case GL_DEBUG_SEVERITY_MEDIUM:
+		VEX_LOG_WARN("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		break;
+	case GL_DEBUG_SEVERITY_LOW:
+		VEX_LOG_INFO("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		break;
+	case GL_DEBUG_SEVERITY_NOTIFICATION:
+		VEX_LOG_DEBUG("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		break;
+	}
+}

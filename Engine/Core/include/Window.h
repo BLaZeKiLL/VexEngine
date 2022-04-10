@@ -14,8 +14,11 @@ namespace VEX
 		const bool FullScreen;
 	};
 
-	class Window
+	class Window final
 	{
+	private:
+		WindowConfig m_Config;
+		GLFWwindow* m_Window;
 	public:
 		Window(const WindowConfig& Config);
 		~Window();
@@ -26,10 +29,5 @@ namespace VEX
 		void Close() const;
 		bool ShouldClose() const;
 		bool IsKeyPressed(int key) const;
-	private:
-		WindowConfig Config;
-		GLFWwindow* _Window;
-
-		static void ResizeCallback(GLFWwindow* window, int width, int height);
 	};
 }

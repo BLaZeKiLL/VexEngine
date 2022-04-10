@@ -7,25 +7,25 @@ namespace VEX
 {
 	class Logger
 	{
+	private:
+		static std::shared_ptr<spdlog::logger> m_EngineLogger;
+		static std::shared_ptr<spdlog::logger> m_GameLogger;
+
 	public:
 		static void Init(const std::string& name);
 
 		inline static std::shared_ptr<spdlog::logger>& GetEngineLogger();
 		inline static std::shared_ptr<spdlog::logger>& GetGameLogger();
-
-	private:
-		static std::shared_ptr<spdlog::logger> EngineLogger;
-		static std::shared_ptr<spdlog::logger> GameLogger;
 	};
 
 	std::shared_ptr<spdlog::logger>& Logger::GetEngineLogger()
 	{
-		return EngineLogger;
+		return m_EngineLogger;
 	}
 
 	std::shared_ptr<spdlog::logger>& Logger::GetGameLogger()
 	{
-		return GameLogger;
+		return m_GameLogger;
 	}
 }
 

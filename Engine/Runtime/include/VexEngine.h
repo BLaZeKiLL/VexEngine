@@ -21,6 +21,12 @@ namespace VEX
 
 	class VexEngine final
 	{
+	private:
+		Game* m_Game;
+		VexRenderer* m_Renderer;
+		Window* m_Window;
+		Timer* m_Timer;
+		std::thread m_GameThread;
 	public:
 		VexEngine(const VexEngineConfig& Config);
 		~VexEngine();
@@ -29,17 +35,8 @@ namespace VEX
 		static constexpr int TARGET_UPS = 60;
 
 		void Start();
-
 	private:
-		Game* Game;
-		VexRenderer* Renderer;
-		Window* Window;
-		Timer* Timer;
-
-		std::thread GameThread;
-
 		void GameThreadRun() const;
-
 		void Init() const;
 		void Loop() const;
 		void Clean() const;

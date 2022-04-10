@@ -7,24 +7,24 @@
 namespace VEX
 {
 	VexEngine::VexEngine(const VexEngineConfig& Config) :
-		Game(Config.Game),
-		Renderer(new VexRenderer(Config.RendererConfig)),
-		Window(new VEX::Window(Config.WindowConfig)),
-		Timer(new VEX::Timer())
+		m_Game(Config.Game),
+		m_Renderer(new VexRenderer(Config.RendererConfig)),
+		m_Window(new VEX::Window(Config.WindowConfig)),
+		m_Timer(new VEX::Timer())
 	{
 		Logger::Init(Config.WindowConfig.Title);
 	}
 
 	VexEngine::~VexEngine()
 	{
-		GameThread.join(); // Needs to be called
+		m_GameThread.join(); // Needs to be called
 
 		VEX_LOG_INFO("Vex Engine Destroyed");
 	}
 
 	void VexEngine::Start()
 	{
-		GameThread = std::thread(&VexEngine::GameThreadRun, this);
+		m_GameThread = std::thread(&VexEngine::GameThreadRun, this);
 	}
 
 	void VexEngine::GameThreadRun() const
@@ -36,20 +36,17 @@ namespace VEX
 
 	void VexEngine::Init() const
 	{
-		Window->Init();
-
-		VEX_LOG_INFO("OpenGL 3.3 Initialized");
-
-		Timer->Init();
-		Renderer->Init();
+		m_Window->Init();
+		m_Timer->Init();
+		m_Renderer->Init();
 
 		VEX_LOG_INFO("Vex Engine Initialized");
 
-		Game->Init();
+		m_Game->Init();
 
 		VEX_LOG_INFO("Game Initialized");
 
-		Game->Start();
+		m_Game->Start();
 	}
 
 	void VexEngine::Loop() const
@@ -57,32 +54,32 @@ namespace VEX
 		float accumulator = 0.0f;
 		constexpr float interval = 1.0f / TARGET_UPS;
 
-		while (!Window->ShouldClose())
+		while (!m_Window->ShouldClose())
 		{
-			accumulator += Timer->GetElapsedTime();
+			accumulator += m_Timer->GetElapsedTime();
 
-			Game->Input(Window);
+			m_Game->Input(m_Window);
 
 			while (accumulator >= interval)
 			{
-				Game->Update(interval);
+				m_Game->Update(interval);
 				accumulator -= interval;
 			}
 
-			Renderer->Render();
-			Window->Update();
+			m_Renderer->Render();
+			m_Window->Update();
 		}
 	}
 
 	void VexEngine::Clean() const
 	{
-		Game->Clean();
+		m_Game->Clean();
 
 		VEX_LOG_INFO("Game Clean Up");
 
-		delete Window;
-		delete Renderer;
-		delete Timer;
+		delete m_Window;
+		delete m_Renderer;
+		delete m_Timer;
 
 		VEX_LOG_INFO("Vex Engine Clean Up");
 	}

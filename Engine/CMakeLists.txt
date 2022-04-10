@@ -1,4 +1,5 @@
 add_subdirectory("Core")
 add_subdirectory("Resource")
+add_subdirectory("Shader")
 add_subdirectory("Renderer")
 add_subdirectory("Runtime")
