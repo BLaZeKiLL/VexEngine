@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "Vex/Core.h"
-#include "Vex/Platform.h"
+#include "Vex/Platform/OpenGL.h"
 
 #include "ShaderCompiler.h"
 

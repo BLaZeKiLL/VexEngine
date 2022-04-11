@@ -64,7 +64,8 @@ namespace VEX
 				accumulator -= interval;
 			}
 
-			m_Renderer->Render();
+			m_Renderer->Prepare();
+			m_Game->Render(m_Renderer);
 			m_Window->Update();
 		}
 	}

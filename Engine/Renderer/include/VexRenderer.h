@@ -4,9 +4,8 @@
 
 namespace VEX
 {
-	class VertexBuffer;
-	class IndexBuffer;
-	class VertexArray;
+	class Mesh;
+	class Shader;
 
 	struct RendererConfig
 	{
@@ -18,14 +17,11 @@ namespace VEX
 	private:
 		RendererConfig m_Config;
 
-		VertexBuffer* m_VB;
-		IndexBuffer* m_IB;
-		VertexArray* m_VA;
-
 	public:
 		VexRenderer(const RendererConfig& config);
 		~VexRenderer();
 
-		void Render() const;
+		void Prepare() const;
+		void Render(const Mesh* mesh, const Shader* shader) const;
 	};
 }

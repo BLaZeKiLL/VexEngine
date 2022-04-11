@@ -12,4 +12,4 @@ target_include_directories(VEX_RENDERER PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/incl
 
 target_include_directories(VEX_RENDERER INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
-target_link_libraries(VEX_RENDERER PUBLIC VEX_CORE)
+target_link_libraries(VEX_RENDERER PUBLIC VEX_CORE VEX_RESOURCE)

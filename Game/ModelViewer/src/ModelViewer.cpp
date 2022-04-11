@@ -1,9 +1,7 @@
+#include "Vex/Vex.h"
+
 #include "ModelViewer.h"
 
-#include "Platform/OpenGL/Shader.h"
-#include "Vex/Libs.h"
-#include "Vex/Core.h"
-#include "Vex/Shader.h"
 
 void ModelViewer::Start() // Game State Initialization
 {
@@ -11,15 +9,34 @@ void ModelViewer::Start() // Game State Initialization
 
 	const auto* compiler = new VEX::ShaderCompiler();
 
-	m_shader = compiler->Compile("assets/Shaders/default.shader");
-
-	m_shader->Bind();
-	m_shader->SetUniform4fv("u_Color", glm::vec4(0.1f, 1.0f, 0.1f, 1.0f));
+	m_Shader = compiler->Compile("assets/Shaders/default.shader");
 
 	delete compiler;
+
+	m_Shader->Bind();
+	m_Shader->SetUniform4fv("u_Color", glm::vec4(0.5f, 4.0f, 0.8f, 1.0f));
+	m_Shader->Unbind();
+
+	constexpr glm::vec2 vertices[] = {
+		glm::vec2(-0.5f, -0.5f),
+		glm::vec2(-0.5f, 0.5f),
+		glm::vec2(0.5f, -0.5f),
+		glm::vec2(0.5f, 0.5f),
+	};
+
+	constexpr unsigned int indices[] = {
+		0, 1, 2,
+		2, 1, 3
+	};
+
+	VEX::VertexBufferLayout layout;
+
+	layout.Push<float>(2);
+
+	m_Mesh = new VEX::Mesh(layout, vertices, 4 * sizeof(glm::vec2), indices, 6);
 }
 
-void ModelViewer::Input(VEX::Window* window)
+void ModelViewer::Input(const VEX::Window* window)
 {
 	if (window->IsKeyPressed(GLFW_KEY_ESCAPE)) {
 		window->Close();
@@ -31,14 +48,15 @@ void ModelViewer::Update(float delta)
 
 }
 
-void ModelViewer::Render()
+void ModelViewer::Render(const VEX::VexRenderer* renderer)
 {
-
+	renderer->Render(m_Mesh, m_Shader);
 }
 
 void ModelViewer::Dispose()
 {
-	delete m_shader;
+	delete m_Mesh;
+	delete m_Shader;
 
 	GAME_LOG_INFO("Game Dispose");
 }
