@@ -7,7 +7,8 @@ namespace VEX
 	private:
 		double m_LastLoopTime;
 	public:
-		void Init();
+		Timer();
+
 		double GetTime() const;
 		float GetElapsedTime();
 	};

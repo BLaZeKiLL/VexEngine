@@ -11,11 +11,10 @@ namespace VEX
 	public:
 		virtual ~Game() = default;
 
-		virtual void Init() PURE;
 		virtual void Start() PURE;
 		virtual void Input(Window* window) PURE;
 		virtual void Update(float delta) PURE;
 		virtual void Render() PURE;
-		virtual void Clean() PURE;
+		virtual void Dispose() PURE;
 	};
 }

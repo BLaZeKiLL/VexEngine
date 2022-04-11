@@ -1,7 +1,5 @@
 #pragma once
 
-#include <thread>
-
 namespace VEX
 {
 	class Timer;
@@ -22,23 +20,23 @@ namespace VEX
 	class VexEngine final
 	{
 	private:
-		Game* m_Game;
-		VexRenderer* m_Renderer;
 		Window* m_Window;
 		Timer* m_Timer;
-		std::thread m_GameThread;
+		VexRenderer* m_Renderer;
+
+		Game* m_Game;
 	public:
-		VexEngine(const VexEngineConfig& Config);
+		VexEngine(const VexEngineConfig& config);
 		~VexEngine();
 
 		static constexpr int TARGET_FPS = 120;
 		static constexpr int TARGET_UPS = 60;
 
-		void Start();
+		static void Bootstrap(const VexEngineConfig& config);
 	private:
-		void GameThreadRun() const;
-		void Init() const;
+		void Main() const;
+		void Start() const;
 		void Loop() const;
-		void Clean() const;
+		void Dispose() const;
 	};
 }

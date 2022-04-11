@@ -26,7 +26,6 @@ namespace VEX
 		VexRenderer(const RendererConfig& config);
 		~VexRenderer();
 
-		void Init();
 		void Render() const;
 	};
 }

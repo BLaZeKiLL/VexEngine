@@ -8,25 +8,14 @@ namespace VEX
 {
 	VexRenderer::VexRenderer(const RendererConfig& config) : m_Config(config)
 	{
-	}
-
-	VexRenderer::~VexRenderer()
-	{
-		delete m_VB;
-		delete m_IB;
-		delete m_VA;
-	}
-
-	void VexRenderer::Init()
-	{
-		const glm::vec2 positions[] = {
+		constexpr glm::vec2 positions[] = {
 			glm::vec2(-0.5f, -0.5f),
 			glm::vec2(-0.5f, 0.5f),
 			glm::vec2(0.5f, -0.5f),
 			glm::vec2(0.5f, 0.5f),
 		};
 
-		const unsigned int indices[] = {
+		constexpr unsigned int indices[] = {
 			0, 1, 2,
 			2, 1, 3
 		};
@@ -44,6 +33,13 @@ namespace VEX
 		m_IB = new IndexBuffer(indices, 6);
 
 		VEX_LOG_INFO("Renderer Initialized");
+	}
+
+	VexRenderer::~VexRenderer()
+	{
+		delete m_VB;
+		delete m_IB;
+		delete m_VA;
 	}
 
 	void VexRenderer::Render() const

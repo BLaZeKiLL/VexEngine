@@ -9,16 +9,6 @@ namespace VEX
 {
 	Window::Window(const WindowConfig& Config) : m_Config(Config)
 	{
-	}
-
-	Window::~Window()
-	{
-		glfwDestroyWindow(m_Window);
-		glfwTerminate();
-	}
-
-	void Window::Init()
-	{
 		if (!glfwInit())
 		{
 			VEX_LOG_ERROR("GLFW Failed To Initialize");
@@ -53,6 +43,12 @@ namespace VEX
 		glfwShowWindow(m_Window);
 
 		InitializePlatform(Platform::OPENGL, m_Window);
+	}
+
+	Window::~Window()
+	{
+		glfwDestroyWindow(m_Window);
+		glfwTerminate();
 	}
 
 	void Window::Update() const

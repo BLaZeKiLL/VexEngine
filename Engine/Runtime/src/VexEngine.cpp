@@ -6,46 +6,44 @@
 
 namespace VEX
 {
-	VexEngine::VexEngine(const VexEngineConfig& Config) :
-		m_Game(Config.Game),
-		m_Renderer(new VexRenderer(Config.RendererConfig)),
-		m_Window(new VEX::Window(Config.WindowConfig)),
-		m_Timer(new VEX::Timer())
+	VexEngine::VexEngine(const VexEngineConfig& config) :
+		m_Window(new VEX::Window(config.WindowConfig)),
+		m_Timer(new VEX::Timer()),
+		m_Renderer(new VexRenderer(config.RendererConfig)),
+		m_Game(config.Game)
 	{
-		Logger::Init(Config.WindowConfig.Title);
+		VEX_LOG_INFO("Vex Engine Constructed");
 	}
 
 	VexEngine::~VexEngine()
 	{
-		m_GameThread.join(); // Needs to be called
+		delete m_Renderer;
+		delete m_Timer;
+		delete m_Window;
 
 		VEX_LOG_INFO("Vex Engine Destroyed");
 	}
 
-	void VexEngine::Start()
+	void VexEngine::Bootstrap(const VexEngineConfig& config)
 	{
-		m_GameThread = std::thread(&VexEngine::GameThreadRun, this);
+		Logger::Init(config.WindowConfig.Title);
+
+		const auto engine = new VexEngine(config);
+
+		engine->Main();
+
+		delete engine;
 	}
 
-	void VexEngine::GameThreadRun() const
+	void VexEngine::Main() const
 	{
-		Init();
+		Start();
 		Loop();
-		Clean();
+		Dispose();
 	}
 
-	void VexEngine::Init() const
+	void VexEngine::Start() const
 	{
-		m_Window->Init();
-		m_Timer->Init();
-		m_Renderer->Init();
-
-		VEX_LOG_INFO("Vex Engine Initialized");
-
-		m_Game->Init();
-
-		VEX_LOG_INFO("Game Initialized");
-
 		m_Game->Start();
 	}
 
@@ -71,16 +69,8 @@ namespace VEX
 		}
 	}
 
-	void VexEngine::Clean() const
+	void VexEngine::Dispose() const
 	{
-		m_Game->Clean();
-
-		VEX_LOG_INFO("Game Clean Up");
-
-		delete m_Window;
-		delete m_Renderer;
-		delete m_Timer;
-
-		VEX_LOG_INFO("Vex Engine Clean Up");
+		m_Game->Dispose();
 	}
 }

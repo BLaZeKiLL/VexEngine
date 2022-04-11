@@ -23,7 +23,6 @@ namespace VEX
 		Window(const WindowConfig& Config);
 		~Window();
 
-		void Init();
 		void Update() const;
 
 		void Close() const;

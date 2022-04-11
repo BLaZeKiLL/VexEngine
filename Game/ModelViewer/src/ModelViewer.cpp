@@ -3,14 +3,9 @@
 #include "Vex/Libs.h"
 #include "Vex/Core.h"
 
-void ModelViewer::Init() // Resource Loading
-{
-	GAME_LOG_INFO("Resource Loading Done");
-}
-
 void ModelViewer::Start() // Game State Initialization
 {
-	GAME_LOG_INFO("Game State Initialized");
+	GAME_LOG_INFO("Game Start");
 }
 
 void ModelViewer::Input(VEX::Window* window)
@@ -30,7 +25,7 @@ void ModelViewer::Render()
 
 }
 
-void ModelViewer::Clean()
+void ModelViewer::Dispose()
 {
-	GAME_LOG_INFO("Resources Released");
+	GAME_LOG_INFO("Game Dispose");
 }
