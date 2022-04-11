@@ -1,7 +1,7 @@
 #shader vertex
 #version 450 core
 
-layout(location = 0) in vec3 position;
+layout(location = 0) in vec4 position;
 
 void main()
 {
@@ -11,7 +11,11 @@ void main()
 #shader fragment
 #version 450 core
 
+out vec4 color;
+
+uniform vec4 u_Color;
+
 void main()
 {
-	color = vec4(1.0, 0.0, 0.0, 1.0)
+	color = u_Color;
 }

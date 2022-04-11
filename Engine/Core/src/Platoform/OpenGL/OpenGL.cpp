@@ -31,16 +31,16 @@ void VEX::MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity
 	switch (severity)
 	{
 	case GL_DEBUG_SEVERITY_HIGH:
-		VEX_LOG_ERROR("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		VEX_LOG_ERROR("[OPENGL: {} type = {}] message = {}\n", id, type, message);
 		break;
 	case GL_DEBUG_SEVERITY_MEDIUM:
-		VEX_LOG_WARN("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		VEX_LOG_WARN("[OPENGL: {} type = {}] message = {}\n", id, type, message);
 		break;
 	case GL_DEBUG_SEVERITY_LOW:
-		VEX_LOG_INFO("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		VEX_LOG_INFO("[OPENGL: {} type = {}] message = {}\n", id, type, message);
 		break;
 	case GL_DEBUG_SEVERITY_NOTIFICATION:
-		VEX_LOG_DEBUG("[OPENGL: %d type = 0x%x] message = %s\n", id, type, message);
+		VEX_LOG_DEBUG("[OPENGL: {} type = {}] message = {}\n", id, type, message);
 		break;
 	}
 }
