@@ -1,7 +1,7 @@
 #include "CoreLibs.h"
 
 #include "Logger.h"
-#include "Platform/OpenGL/OpenGL.h"
+#include "OpenGL/OpenGL.h"
 
 bool VEX::InitializeOpenGL(GLFWwindow* window)
 {

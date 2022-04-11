@@ -12,4 +12,4 @@ target_include_directories(VEX_SHADER PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/includ
 
 target_include_directories(VEX_SHADER INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
-target_link_libraries(VEX_SHADER PUBLIC VEX_CORE)
+target_link_libraries(VEX_SHADER PUBLIC VEX_CORE VEX_RESOURCE)

@@ -14,7 +14,7 @@ void ModelViewer::Start() // Game State Initialization
 	delete compiler;
 
 	m_Shader->Bind();
-	m_Shader->SetUniform4fv("u_Color", glm::vec4(0.5f, 4.0f, 0.8f, 1.0f));
+	m_Shader->SetUniform4f("u_Color", glm::vec4(0.5f, 4.0f, 0.8f, 1.0f));
 	m_Shader->Unbind();
 
 	constexpr glm::vec2 vertices[] = {

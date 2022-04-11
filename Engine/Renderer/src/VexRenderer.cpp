@@ -1,6 +1,5 @@
 #include "Vex/Libs.h"
 #include "Vex/Resource.h"
-#include "Vex/Platform/OpenGL.h"
 
 #include "VexRenderer.h"
 

@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include "CoreLibs.h"
-
 namespace VEX
 {
 	class Shader final
@@ -17,7 +15,7 @@ namespace VEX
 		void Bind() const;
 		void Unbind() const;
 
-		void SetUniform4fv(const std::string& name, const glm::vec4 value) const;
+		void SetUniform4f(const std::string& name, const glm::vec4 value) const;
 	private:
 		int GetUniformLocation(const std::string& name) const;
 	};

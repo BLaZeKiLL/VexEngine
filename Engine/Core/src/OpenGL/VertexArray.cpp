@@ -1,8 +1,8 @@
 #include "CoreLibs.h"
 
-#include "Platform/OpenGL/VertexArray.h"
-#include "Platform/OpenGL/VertexBuffer.h"
-#include "Platform/OpenGL/VertexBufferLayout.h"
+#include "OpenGL/VertexArray.h"
+#include "OpenGL/VertexBuffer.h"
+#include "OpenGL/VertexBufferLayout.h"
 
 namespace VEX
 {

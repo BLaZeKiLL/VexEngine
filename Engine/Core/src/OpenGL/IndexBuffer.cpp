@@ -1,6 +1,6 @@
 #include "CoreLibs.h"
 
-#include "Platform/OpenGL/IndexBuffer.h"
+#include "OpenGL/IndexBuffer.h"
 
 namespace VEX
 {

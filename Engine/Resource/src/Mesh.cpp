@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-#include "Vex/Platform/OpenGL.h"
+#include "Vex/OpenGL.h"
 
 namespace VEX
 {

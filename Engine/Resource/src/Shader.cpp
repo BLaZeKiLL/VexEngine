@@ -1,9 +1,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Vex/Core.h"
+#include "Vex/Libs.h"
 
-#include "Logger.h"
-
-#include "Platform/OpenGL/Shader.h"
+#include "Shader.h"
 
 namespace VEX
 {
@@ -26,9 +26,9 @@ namespace VEX
 		glUseProgram(0);
 	}
 
-	void Shader::SetUniform4fv(const std::string& name, const glm::vec4 value) const
+	void Shader::SetUniform4f(const std::string& name, const glm::vec4 value) const
 	{
-		glUniform4fv(GetUniformLocation(name), 1, value_ptr(value));
+		glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w);
 	}
 
 	int Shader::GetUniformLocation(const std::string& name) const

@@ -2,8 +2,7 @@
 
 #include "Window.h"
 #include "Logger.h"
-
-#include "Platform/Platform.h"
+#include "OpenGL/OpenGL.h"
 
 namespace VEX
 {
@@ -42,7 +41,7 @@ namespace VEX
 
 		glfwShowWindow(m_Window);
 
-		InitializePlatform(Platform::OPENGL, m_Window);
+		InitializeOpenGL(m_Window);
 	}
 
 	Window::~Window()
