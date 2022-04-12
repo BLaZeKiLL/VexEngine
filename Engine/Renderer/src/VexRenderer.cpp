@@ -1,4 +1,3 @@
-#include "Vex/Libs.h"
 #include "Vex/Resource.h"
 
 #include "VexRenderer.h"

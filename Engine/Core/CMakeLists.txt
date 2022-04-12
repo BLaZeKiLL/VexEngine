@@ -1,8 +1,3 @@
-find_package(glfw3 CONFIG REQUIRED)
-find_package(glad CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-
 file(GLOB_RECURSE VEX_CORE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 add_library(VEX_CORE ${VEX_CORE_SOURCES})
@@ -17,4 +12,4 @@ target_include_directories(VEX_CORE PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 
 target_include_directories(VEX_CORE INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
-target_link_libraries(VEX_CORE PUBLIC glfw glad::glad glm::glm spdlog::spdlog_header_only)
+target_link_libraries(VEX_CORE PUBLIC VEX_VENDOR)

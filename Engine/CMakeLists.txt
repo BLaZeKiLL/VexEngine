@@ -1,3 +1,4 @@
+add_subdirectory("Vendor")
 add_subdirectory("Core")
 add_subdirectory("Resource")
 add_subdirectory("Shader")

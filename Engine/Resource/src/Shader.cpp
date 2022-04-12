@@ -1,7 +1,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Vex/Vendor.h"
 #include "Vex/Core.h"
-#include "Vex/Libs.h"
 
 #include "Shader.h"
 

@@ -3,7 +3,7 @@
 #include "ModelViewer.h"
 
 
-void ModelViewer::Start() // Game State Initialization
+void ModelViewer::Start()
 {
 	GAME_LOG_INFO("Game Start");
 

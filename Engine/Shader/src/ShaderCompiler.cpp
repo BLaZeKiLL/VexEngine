@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "Vex/Core.h"
-#include "Vex/Libs.h"
+#include "Vex/Vendor.h"
 #include "Vex/Resource.h"
 
 #include "ShaderCompiler.h"

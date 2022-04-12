@@ -1,4 +1,4 @@
-#include "CoreLibs.h"
+#include "Vex/Vendor.h"
 
 #include "OpenGL/VertexArray.h"
 #include "OpenGL/VertexBuffer.h"
