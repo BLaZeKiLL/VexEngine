@@ -21,7 +21,8 @@ namespace VEX
 		VexRenderer(const RendererConfig& config);
 		~VexRenderer();
 
-		void Prepare() const;
+		void PreRender() const;
 		void Render(const Mesh* mesh, const Shader* shader) const;
+		void PostRender() const;
 	};
 }

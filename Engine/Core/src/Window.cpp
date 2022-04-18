@@ -1,5 +1,8 @@
 #include "Vex/Vendor.h"
 
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #include "Window.h"
 #include "Logger.h"
 #include "OpenGL/OpenGL.h"
@@ -41,17 +44,38 @@ namespace VEX
 
 		glfwShowWindow(m_Window);
 
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGui::StyleColorsDark();
+
+		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+		ImGui_ImplOpenGL3_Init("#version 450");
+
 		InitializeOpenGL(m_Window);
 	}
 
 	Window::~Window()
 	{
+		ImGui_ImplOpenGL3_Shutdown();
+	    ImGui_ImplGlfw_Shutdown();
+	    ImGui::DestroyContext();
+
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 	}
 
-	void Window::Update() const
+	void Window::PreRender() const
 	{
+		ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+	}
+
+	void Window::PostRender() const
+	{
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}

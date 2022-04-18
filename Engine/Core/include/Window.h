@@ -23,7 +23,8 @@ namespace VEX
 		Window(const WindowConfig& Config);
 		~Window();
 
-		void Update() const;
+		void PreRender() const;
+		void PostRender() const;
 
 		void Close() const;
 		bool ShouldClose() const;

@@ -10,8 +10,6 @@ namespace VEX
 	class Game
 	{
 	public:
-		virtual ~Game() = default;
-
 		virtual void Start() PURE;
 		virtual void Input(const Window* window) PURE;
 		virtual void Update(float delta) PURE;

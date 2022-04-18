@@ -12,7 +12,7 @@ namespace VEX
 	{
 	}
 
-	void VexRenderer::Prepare() const
+	void VexRenderer::PreRender() const
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(m_Config.ClearColor.r, m_Config.ClearColor.g, m_Config.ClearColor.b, m_Config.ClearColor.a);
@@ -27,5 +27,10 @@ namespace VEX
 
 		mesh->Unbind();
 		shader->Unbind();
+	}
+
+	void VexRenderer::PostRender() const
+	{
+
 	}
 }

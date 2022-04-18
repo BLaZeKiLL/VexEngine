@@ -58,15 +58,21 @@ namespace VEX
 
 			m_Game->Input(m_Window);
 
+			// Update
 			while (accumulator >= interval)
 			{
 				m_Game->Update(interval);
 				accumulator -= interval;
 			}
 
-			m_Renderer->Prepare();
+			// Render
+			m_Window->PreRender();
+			m_Renderer->PreRender();
+
 			m_Game->Render(m_Renderer);
-			m_Window->Update();
+
+			m_Renderer->PostRender();
+			m_Window->PostRender();
 		}
 	}
 

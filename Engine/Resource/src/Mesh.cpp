@@ -4,9 +4,9 @@
 
 namespace VEX
 {
-	Mesh::Mesh(VertexBufferLayout& layout, const void* vertices, const unsigned int size, const unsigned int* indices, const unsigned int count) :
-		m_layout(layout), m_VertexSize(size), m_IndexCount(count),
-		m_VB(new VertexBuffer(vertices, m_VertexSize)),
+	Mesh::Mesh(VertexBufferLayout& layout, const void* vertices, const unsigned int vcount, const unsigned int* indices, const unsigned int icount) :
+		m_layout(layout), m_VertexCount(vcount), m_IndexCount(icount),
+		m_VB(new VertexBuffer(vertices, m_VertexCount * m_layout.GetStride())),
 		m_IB(new IndexBuffer(indices, m_IndexCount)),
 		m_VA(new VertexArray())
 	{
