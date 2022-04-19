@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vex/Vendor.h"
+#include "Vex/Math.h"
 
 namespace VEX
 {

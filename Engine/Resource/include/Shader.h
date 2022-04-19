@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "Vex/Vendor.h"
+#include "Vex/Math.h"
 
 namespace VEX
 {

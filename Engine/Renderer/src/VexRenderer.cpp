@@ -1,3 +1,4 @@
+#include "Vex/Vendor.h"
 #include "Vex/Resource.h"
 
 #include "VexRenderer.h"

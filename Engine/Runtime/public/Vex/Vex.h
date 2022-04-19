@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vex/Vendor.h"
+#include "Vex/Math.h"
 #include "Vex/Core.h"
 #include "Vex/OpenGL.h"
 #include "Vex/Shader.h"
