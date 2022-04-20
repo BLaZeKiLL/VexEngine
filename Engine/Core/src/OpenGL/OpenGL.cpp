@@ -19,6 +19,8 @@ bool VEX::InitializeOpenGL(GLFWwindow* window)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	glEnable(GL_DEPTH_TEST);
+
 	glfwSetFramebufferSizeCallback(window, ResizeCallback);
 
 	VEX_LOG_INFO("OpenGL 4.5 Initialized");

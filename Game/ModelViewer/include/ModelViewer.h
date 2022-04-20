@@ -12,6 +12,12 @@ namespace VEX
 	class VexRenderer;
 }
 
+struct Vertex
+{
+	glm::vec3 Position;
+	glm::vec2 UV0;
+};
+
 class ModelViewer final : public VEX::Game
 {
 private:
@@ -19,8 +25,6 @@ private:
 	VEX::Texture* m_Texture;
 	VEX::Mesh* m_Mesh;
 
-	glm::mat4 m_Projection;
-	glm::mat4 m_View;
 	glm::mat4 m_Model;
 
 	glm::vec3 m_Position;
