@@ -5,6 +5,16 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 
+VEX::VertexBufferLayout Vertex::GetLayout()
+{
+	VEX::VertexBufferLayout layout;
+
+	layout.Push<float>(3); // Positions
+	layout.Push<float>(2); // UV's
+
+	return layout;
+}
+
 ModelViewer::ModelViewer() :
 	m_Shader(nullptr),
 	m_Texture(nullptr),
@@ -58,10 +68,7 @@ void ModelViewer::Start()
 		2, 1, 3
 	};
 
-	VEX::VertexBufferLayout layout;
-
-	layout.Push<float>(3); // Positions
-	layout.Push<float>(2); // UV's
+	auto layout = Vertex::GetLayout();
 
 	m_Mesh = new VEX::Mesh(layout, vertices, 4, indices, 6);
 }

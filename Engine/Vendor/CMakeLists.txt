@@ -2,6 +2,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
+find_package(assimp CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 file(GLOB_RECURSE VEX_VENDOR_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
@@ -18,4 +19,4 @@ target_include_directories(VEX_VENDOR PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/includ
 
 target_include_directories(VEX_VENDOR INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
-target_link_libraries(VEX_VENDOR PUBLIC glfw glad::glad glm::glm spdlog::spdlog_header_only imgui::imgui)
+target_link_libraries(VEX_VENDOR PUBLIC glfw glad::glad glm::glm spdlog::spdlog_header_only assimp::assimp imgui::imgui)

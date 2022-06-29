@@ -10,12 +10,15 @@ namespace VEX
 	class Window;
 	class Texture;
 	class VexRenderer;
+	class VertexBufferLayout;
 }
 
 struct Vertex
 {
 	glm::vec3 Position;
 	glm::vec2 UV0;
+
+	static VEX::VertexBufferLayout GetLayout();
 };
 
 class ModelViewer final : public VEX::Game

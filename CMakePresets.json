@@ -22,6 +22,9 @@
 					"hostOS": [
 						"Windows"
 					]
+				},
+				"jetbrains.com/clion": {
+					"toolchain": "Clang"
 				}
 			}
 		},
