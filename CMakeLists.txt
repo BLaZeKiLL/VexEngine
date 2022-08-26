@@ -3,13 +3,20 @@
 
 cmake_minimum_required (VERSION 3.8)
 
-if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-endif()
+# VCPKG Bootstrap
+if (WIN32)
+    execute_process(COMMAND cmd /c "${CMAKE_CURRENT_SOURCE_DIR}/.vcpkg/bootstrap-vcpkg.bat"
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif ()
 
-if(DEFINED ENV{VCPKG_DEFAULT_TRIPLET} AND NOT DEFINED VCPKG_TARGET_TRIPLET)
-    set(VCPKG_TARGET_TRIPLET "$ENV{VCPKG_DEFAULT_TRIPLET}" CACHE STRING "")
-endif()
+if (UNIX)
+    execute_process(COMMAND bash -c "${CMAKE_CURRENT_SOURCE_DIR}/.vcpkg/bootstrap-vcpkg.sh"
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif ()
+
+# VCPKG Config
+set(CMAKE_TOOLCHAIN_FILE ".vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
 
 project ("VexEngine" VERSION 0.1.0)
 
