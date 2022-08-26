@@ -38,7 +38,7 @@ void ModelViewer::Start()
 
 	delete compiler;
 
-	m_Texture = new VEX::Texture("assets/Textures/codeblaze.png");
+	m_Texture = new VEX::Texture("assets/Textures/codeblaze_trans.png");
 
 	m_Texture->Bind();
 	m_Shader->Bind();
@@ -92,7 +92,7 @@ void ModelViewer::Render(const VEX::VexRenderer* renderer)
 		m_Shader,
 		glm::rotate(
 			glm::translate(m_Model, m_Position),
-			glm::radians(-45.0f),
+			glm::radians(0.0f),
 			glm::vec3(1.0f, 0.0f, 0.0f)
 		)
 	);

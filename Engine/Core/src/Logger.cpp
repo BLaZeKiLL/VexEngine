@@ -12,9 +12,9 @@ namespace VEX
 		spdlog::set_pattern("%^[%n][%T][%4!l]%$ : %v");
 
 		m_EngineLogger = spdlog::stdout_color_mt("VEX");
-		m_EngineLogger->set_level(spdlog::level::trace);
+		m_EngineLogger->set_level(spdlog::level::info);
 
 		m_GameLogger = spdlog::stdout_color_mt(name);
-		m_GameLogger->set_level(spdlog::level::trace);
+		m_GameLogger->set_level(spdlog::level::info);
 	}
 }
