@@ -19,15 +19,20 @@ namespace VEX
 	private:
 		WindowConfig m_Config;
 		GLFWwindow* m_Window;
+
+        float m_LastTime;
 	public:
 		Window(const WindowConfig& Config);
 		~Window();
 
 		void PreRender() const;
-		void PostRender() const;
+		void PostRender();
 
 		void Close() const;
 		bool ShouldClose() const;
 		bool IsKeyPressed(int key) const;
+
+        float GetTime() const;
+        float GetDeltaTime() const;
 	};
 }

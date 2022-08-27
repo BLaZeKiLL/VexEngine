@@ -71,10 +71,12 @@ namespace VEX
         ImGui::NewFrame();
 	}
 
-	void Window::PostRender() const
+	void Window::PostRender()
 	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        m_LastTime = glfwGetTime();
 
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
@@ -94,4 +96,12 @@ namespace VEX
 	{
 		return glfwGetKey(m_Window, key) == GLFW_PRESS;
 	}
+
+    float Window::GetTime() const {
+        return glfwGetTime();
+    }
+
+    float Window::GetDeltaTime() const {
+        return glfwGetTime() - m_LastTime;
+    }
 }

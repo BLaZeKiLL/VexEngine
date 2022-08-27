@@ -2,9 +2,6 @@
 
 #include "ModelViewer.h"
 
-#include "glm/gtc/matrix_transform.hpp"
-
-
 VEX::VertexBufferLayout Vertex::GetLayout()
 {
 	VEX::VertexBufferLayout layout;
@@ -16,13 +13,13 @@ VEX::VertexBufferLayout Vertex::GetLayout()
 }
 
 ModelViewer::ModelViewer() :
-	m_Shader(nullptr),
-	m_Texture(nullptr),
-	m_Mesh(nullptr),
-	m_Model(glm::mat4(1.0f)),
-	m_Position(glm::vec3(0.0f, 0.0f, 0.0f)),
-    m_Axis(glm::vec3(1.0f, 1.0f, 1.0f)),
-    m_Rotation(45.0f)
+        m_Shader(nullptr),
+        m_Texture(nullptr),
+        m_Mesh(nullptr),
+        m_Transform(glm::mat4(1.0f)),
+        m_Position(glm::vec3(0.0f, 0.0f, -5.0f)),
+        m_Axis(glm::vec3(1.0f, 1.0f, 1.0f)),
+        m_Rotation(45.0f)
 {
 }
 
@@ -106,11 +103,22 @@ void ModelViewer::Start()
 	m_Mesh = new VEX::Mesh(layout, vertices, 24, indices, 36);
 }
 
-void ModelViewer::Input(const VEX::Window* window)
+void ModelViewer::Input(const VEX::Window* window, VEX::Camera* camera)
 {
 	if (window->IsKeyPressed(GLFW_KEY_ESCAPE)) {
 		window->Close();
 	}
+
+    float speed = 0.05f;
+
+    if (window->IsKeyPressed(GLFW_KEY_W))
+        camera->Move(VEX::CameraMovement::FORWARD, speed);
+    if (window->IsKeyPressed(GLFW_KEY_S))
+        camera->Move(VEX::CameraMovement::BACKWARD, speed);
+    if (window->IsKeyPressed(GLFW_KEY_A))
+        camera->Move(VEX::CameraMovement::LEFT, speed);
+    if (window->IsKeyPressed(GLFW_KEY_D))
+        camera->Move(VEX::CameraMovement::RIGHT, speed);
 }
 
 void ModelViewer::Update(float delta)
@@ -124,7 +132,7 @@ void ModelViewer::Render(const VEX::VexRenderer* renderer)
 		m_Mesh,
 		m_Shader,
 		glm::rotate(
-			glm::translate(m_Model, m_Position),
+			glm::translate(m_Transform, m_Position),
 			glm::radians(m_Rotation),
 			glm::normalize(m_Axis)
 		)
@@ -133,7 +141,7 @@ void ModelViewer::Render(const VEX::VexRenderer* renderer)
 	ImGui::Begin("Model Viewer");
 
 	ImGui::Text("Welcome to Model Viewer");
-	ImGui::SliderFloat3("Position", glm::value_ptr(m_Position), -4.0f, 4.0f);
+	ImGui::InputFloat3("Position", glm::value_ptr(m_Position));
 	ImGui::SliderFloat3("Axis", glm::value_ptr(m_Axis), 0.0f, 1.0f);
 	ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

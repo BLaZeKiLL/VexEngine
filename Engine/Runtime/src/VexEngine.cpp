@@ -56,7 +56,7 @@ namespace VEX
 		{
 			accumulator += m_Timer->GetElapsedTime();
 
-			m_Game->Input(m_Window);
+			m_Game->Input(m_Window, m_Renderer->GetCamera());
 
 			// Update
 			while (accumulator >= interval)

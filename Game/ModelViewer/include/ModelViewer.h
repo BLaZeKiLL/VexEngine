@@ -6,6 +6,7 @@
 namespace VEX
 {
 	class Mesh;
+    class Camera;
 	class Shader;
 	class Window;
 	class Texture;
@@ -28,7 +29,7 @@ private:
 	VEX::Texture* m_Texture;
 	VEX::Mesh* m_Mesh;
 
-	glm::mat4 m_Model;
+	glm::mat4 m_Transform;
 
 	glm::vec3 m_Position;
     glm::vec3 m_Axis;
@@ -38,7 +39,7 @@ public:
 	~ModelViewer();
 protected:
 	void Start() override;
-	void Input(const VEX::Window* window) override;
+	void Input(const VEX::Window* window, VEX::Camera* camera) override;
 	void Update(float delta) override;
 	void Render(const VEX::VexRenderer* renderer) override;
 	void Dispose() override;

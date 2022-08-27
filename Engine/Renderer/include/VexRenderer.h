@@ -29,5 +29,7 @@ namespace VEX
 		void PreRender() const;
 		void Render(const Mesh* mesh, Shader* shader, const glm::mat4 transform) const;
 		void PostRender() const;
+
+        inline Camera* GetCamera() const { return m_Camera; }
 	};
 }
