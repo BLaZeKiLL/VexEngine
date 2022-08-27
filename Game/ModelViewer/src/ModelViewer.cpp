@@ -105,20 +105,37 @@ void ModelViewer::Start()
 
 void ModelViewer::Input(const VEX::Window* window, VEX::Camera* camera)
 {
-	if (window->IsKeyPressed(GLFW_KEY_ESCAPE)) {
+	if (window->GetKeyAction(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		window->Close();
 	}
 
-    float speed = 0.05f;
+    // Camera - Keyboard
+    float speed = 2.5f * window->GetDeltaTime();
 
-    if (window->IsKeyPressed(GLFW_KEY_W))
+    if (window->GetKeyAction(GLFW_KEY_W) == GLFW_PRESS)
         camera->Move(VEX::CameraMovement::FORWARD, speed);
-    if (window->IsKeyPressed(GLFW_KEY_S))
+    if (window->GetKeyAction(GLFW_KEY_S) == GLFW_PRESS)
         camera->Move(VEX::CameraMovement::BACKWARD, speed);
-    if (window->IsKeyPressed(GLFW_KEY_A))
+    if (window->GetKeyAction(GLFW_KEY_A) == GLFW_PRESS)
         camera->Move(VEX::CameraMovement::LEFT, speed);
-    if (window->IsKeyPressed(GLFW_KEY_D))
+    if (window->GetKeyAction(GLFW_KEY_D) == GLFW_PRESS)
         camera->Move(VEX::CameraMovement::RIGHT, speed);
+
+    // Camera - Mouse
+    if (window->GetMouseAction(GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+        window->LockCursor(true);
+    if (window->GetMouseAction(GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
+        window->LockCursor(false);
+
+    if (window->IsCursorLocked()) {
+        double x_pos, y_pos;
+
+        window->GetCursorPosition(&x_pos, &y_pos);
+
+        camera->Look(x_pos, y_pos, 0.1f);
+    } else {
+        camera->LookReset();
+    }
 }
 
 void ModelViewer::Update(float delta)

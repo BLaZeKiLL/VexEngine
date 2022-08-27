@@ -9,7 +9,10 @@ namespace VEX
             m_Projection(glm::mat4(1.0f)),
             m_Position(glm::vec3(0.0f, 0.0f, 0.0f)),
             m_Pitch(0.0f),
-            m_Yaw(-90.0f)
+            m_Yaw(-90.0f),
+            m_XLast(config.Width / 2),
+            m_YLast(config.Height / 2),
+            m_FirstMouse(true)
 	{
 		switch (config.Projection)
 		{
@@ -42,9 +45,25 @@ namespace VEX
         UpdateViewMatrix();
     }
 
-    void Camera::Look(float x, float y, bool constrain) {
-        m_Yaw += x;
-        m_Pitch += y;
+    void Camera::Look(float x, float y, float sensitivity, bool constrain) {
+        if (m_FirstMouse) {
+            m_XLast = x;
+            m_YLast = y;
+
+            m_FirstMouse = false;
+        }
+
+        auto x_offset = x - m_XLast;
+        auto y_offset = m_YLast - y;
+
+        m_XLast = x;
+        m_YLast = y;
+
+        x_offset *= sensitivity;
+        y_offset *= sensitivity;
+
+        m_Yaw += x_offset;
+        m_Pitch += y_offset;
 
         if (constrain) {
             if (m_Pitch > 89.0f) m_Pitch = 89.0f;
@@ -69,6 +88,10 @@ namespace VEX
         m_View = glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 
         VEX_LOG_TRACE("Camera View : {}", glm::to_string(m_View));
+    }
+
+    void Camera::LookReset() {
+        m_FirstMouse = true;
     }
 
 }

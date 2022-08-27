@@ -92,10 +92,26 @@ namespace VEX
 		return glfwWindowShouldClose(m_Window);
 	}
 
-	bool Window::IsKeyPressed(const int key) const
+	int Window::GetKeyAction(const int key) const
 	{
-		return glfwGetKey(m_Window, key) == GLFW_PRESS;
+		return glfwGetKey(m_Window, key);
 	}
+
+    int Window::GetMouseAction(int key) const {
+        return glfwGetMouseButton(m_Window, key);
+    }
+
+    void Window::LockCursor(bool value) const {
+        glfwSetInputMode(m_Window, GLFW_CURSOR, value ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+    }
+
+    bool Window::IsCursorLocked() const {
+        return glfwGetInputMode(m_Window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+    }
+
+    void Window::GetCursorPosition(double* xpos, double* ypos) const {
+        glfwGetCursorPos(m_Window, xpos, ypos);
+    }
 
     float Window::GetTime() const {
         return glfwGetTime();
@@ -104,4 +120,5 @@ namespace VEX
     float Window::GetDeltaTime() const {
         return glfwGetTime() - m_LastTime;
     }
+
 }

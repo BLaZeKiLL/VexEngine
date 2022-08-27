@@ -38,15 +38,23 @@ namespace VEX
         glm::vec3 m_Front;
         glm::vec3 m_Right;
         glm::vec3 m_Up;
+
+        float m_XLast;
+        float m_YLast;
+
+        bool m_FirstMouse;
 	public:
 		Camera(const CameraConfig& config);
 		~Camera();
 
 		inline glm::mat4 GetMVP(const glm::mat4 model) const { return m_Projection * m_View * model; }
 
-        void Move(const CameraMovement direction, float speed);
-        void Look(float x, float y, bool constrain = true);
-	private:
+        void Move(CameraMovement direction, float speed);
+        void Look(float x, float y, float sensitivity, bool constrain = true);
+
+        void LookReset();
+
+    private:
         void UpdateViewMatrix();
-	};
+    };
 }

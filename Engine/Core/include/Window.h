@@ -30,7 +30,13 @@ namespace VEX
 
 		void Close() const;
 		bool ShouldClose() const;
-		bool IsKeyPressed(int key) const;
+
+		int GetKeyAction(int key) const;
+        int GetMouseAction(int key) const;
+
+        void LockCursor(bool value) const;
+        bool IsCursorLocked() const;
+        void GetCursorPosition(double* xpos, double* ypos) const;
 
         float GetTime() const;
         float GetDeltaTime() const;
