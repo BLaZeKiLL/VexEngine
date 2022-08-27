@@ -20,7 +20,9 @@ ModelViewer::ModelViewer() :
 	m_Texture(nullptr),
 	m_Mesh(nullptr),
 	m_Model(glm::mat4(1.0f)),
-	m_Position(glm::vec3(0.0f, 0.0f, 0.0f))
+	m_Position(glm::vec3(0.0f, 0.0f, 0.0f)),
+    m_Axis(glm::vec3(1.0f, 1.0f, 1.0f)),
+    m_Rotation(45.0f)
 {
 }
 
@@ -38,7 +40,7 @@ void ModelViewer::Start()
 
 	delete compiler;
 
-	m_Texture = new VEX::Texture("assets/Textures/codeblaze_trans.png");
+	m_Texture = new VEX::Texture("assets/Textures/codeblaze.png");
 
 	m_Texture->Bind();
 	m_Shader->Bind();
@@ -47,30 +49,61 @@ void ModelViewer::Start()
 
 	m_Shader->Unbind();
 
-	// ORTHOGRAPHIC SQUARE
-	// constexpr glm::vec2 vertices[] = {
-	// 	glm::vec2(-100.0f, -100.0f), glm::vec2(0.0f, 0.0f),
-	// 	glm::vec2(-100.0f,  100.0f), glm::vec2(0.0f, 1.0f),
-	// 	glm::vec2( 100.0f, -100.0f), glm::vec2(1.0f, 0.0f),
-	// 	glm::vec2( 100.0f,  100.0f), glm::vec2(1.0f, 1.0f),
-	// };
-
-	// PERSPECTIVE SQUARE
 	constexpr Vertex vertices[] = {
-		Vertex { glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f) },
-		Vertex { glm::vec3(-0.5f,  0.5f, 0.0f), glm::vec2(0.0f, 1.0f) },
-		Vertex { glm::vec3( 0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 0.0f) },
-		Vertex { glm::vec3( 0.5f,  0.5f, 0.0f), glm::vec2(1.0f, 1.0f) },
+		Vertex { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f) },
+		Vertex { glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec2(0.0f, 1.0f) },
+		Vertex { glm::vec3( 0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f) },
+		Vertex { glm::vec3( 0.5f,  0.5f, -0.5f), glm::vec2(1.0f, 1.0f) },
+
+        Vertex { glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f) },
+        Vertex { glm::vec3(-0.5f,  0.5f, 0.5f), glm::vec2(0.0f, 1.0f) },
+        Vertex { glm::vec3( 0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f) },
+        Vertex { glm::vec3( 0.5f,  0.5f, 0.5f), glm::vec2(1.0f, 1.0f) },
+
+        Vertex { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f) },
+        Vertex { glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 1.0f) },
+        Vertex { glm::vec3( 0.5f,-0.5f, -0.5f), glm::vec2(1.0f, 0.0f) },
+        Vertex { glm::vec3( 0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 1.0f) },
+
+        Vertex { glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 0.0f) },
+        Vertex { glm::vec3(-0.5f,  0.5f, 0.5f), glm::vec2(0.0f, 1.0f) },
+        Vertex { glm::vec3( 0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 0.0f) },
+        Vertex { glm::vec3( 0.5f,  0.5f, 0.5f), glm::vec2(1.0f, 1.0f) },
+
+        Vertex { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f) },
+        Vertex { glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec2(0.0f, 1.0f) },
+        Vertex { glm::vec3(-0.5f,0.5f, -0.5f), glm::vec2(1.0f, 0.0f) },
+        Vertex { glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 1.0f) },
+
+        Vertex { glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f) },
+        Vertex { glm::vec3(0.5f,  -0.5f, 0.5f), glm::vec2(0.0f, 1.0f) },
+        Vertex { glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 0.0f) },
+        Vertex { glm::vec3(0.5f,  0.5f, 0.5f), glm::vec2(1.0f, 1.0f) },
 	};
 
 	constexpr unsigned int indices[] = {
 		0, 1, 2,
-		2, 1, 3
+		2, 1, 3,
+
+        4, 5, 6,
+        6, 5, 7,
+
+        8, 9, 10,
+        10, 9, 11,
+
+        12, 13, 14,
+        14, 13, 15,
+
+        16, 17, 18,
+        18, 17, 19,
+
+        20, 21, 22,
+        22, 21, 23,
 	};
 
 	auto layout = Vertex::GetLayout();
 
-	m_Mesh = new VEX::Mesh(layout, vertices, 4, indices, 6);
+	m_Mesh = new VEX::Mesh(layout, vertices, 24, indices, 36);
 }
 
 void ModelViewer::Input(const VEX::Window* window)
@@ -92,8 +125,8 @@ void ModelViewer::Render(const VEX::VexRenderer* renderer)
 		m_Shader,
 		glm::rotate(
 			glm::translate(m_Model, m_Position),
-			glm::radians(0.0f),
-			glm::vec3(1.0f, 0.0f, 0.0f)
+			glm::radians(m_Rotation),
+			glm::normalize(m_Axis)
 		)
 	);
 
@@ -101,6 +134,8 @@ void ModelViewer::Render(const VEX::VexRenderer* renderer)
 
 	ImGui::Text("Welcome to Model Viewer");
 	ImGui::SliderFloat3("Position", glm::value_ptr(m_Position), -4.0f, 4.0f);
+	ImGui::SliderFloat3("Axis", glm::value_ptr(m_Axis), 0.0f, 1.0f);
+	ImGui::SliderFloat("Rotation", &m_Rotation, 0.0f, 360.0f);
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
 	ImGui::End();

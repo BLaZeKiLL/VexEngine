@@ -31,6 +31,8 @@ private:
 	glm::mat4 m_Model;
 
 	glm::vec3 m_Position;
+    glm::vec3 m_Axis;
+    float m_Rotation;
 public:
 	ModelViewer();
 	~ModelViewer();

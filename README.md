@@ -1,3 +1,3 @@
 # VexEngine
 
-A barebones C++ game engine.
+A bare-bones C++ game engine.
