@@ -21,10 +21,11 @@ in vec2 v_uv;
 
 out vec4 color;
 
-uniform vec4 u_Color;
+uniform vec4 u_LightColor;
+uniform vec4 u_ObjectColor;
 uniform sampler2D u_Texture;
 
 void main()
 {
-	color = texture(u_Texture, v_uv);
+	color = u_LightColor * u_ObjectColor * texture(u_Texture, v_uv);
 }

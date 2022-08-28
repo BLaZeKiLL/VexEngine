@@ -14,17 +14,14 @@ namespace VEX
 	class VertexBufferLayout;
 }
 
-struct Vertex
-{
-	glm::vec3 Position;
-	glm::vec2 UV0;
-
-	static VEX::VertexBufferLayout GetLayout();
-};
+class CameraController;
+struct Vertex;
 
 class ModelViewer final : public VEX::Game
 {
 private:
+    CameraController* m_CameraController;
+
 	VEX::Shader* m_Shader;
 	VEX::Texture* m_Texture;
 	VEX::Mesh* m_Mesh;
@@ -34,15 +31,22 @@ private:
 	glm::vec3 m_Position;
     glm::vec3 m_Axis;
     float m_Rotation;
+
 public:
 	ModelViewer();
 	~ModelViewer();
+
 protected:
 	void Start() override;
 	void Input(const VEX::Window* window, VEX::Camera* camera) override;
 	void Update(float delta) override;
 	void Render(const VEX::VexRenderer* renderer) override;
 	void Dispose() override;
+
+private:
+    void RenderUI();
+    void SetupShader();
+    void SetupModel();
 };
 
 
