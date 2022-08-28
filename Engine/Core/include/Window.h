@@ -12,6 +12,7 @@ namespace VEX
 		const int Width;
 		const int Height;
 		const bool FullScreen;
+        const bool Maximized;
 	};
 
 	class Window final

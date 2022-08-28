@@ -26,7 +26,12 @@ namespace VEX
 		shader->Bind();
 		mesh->Bind();
 
-		shader->SetUniformMat4f("u_MVP", m_Camera->GetMVP(transform));
+		shader->SetUniformMat4f("u_Model", transform);
+		shader->SetUniformMat4f("u_View", m_Camera->GetView());
+		shader->SetUniformMat4f("u_Projection", m_Camera->GetProjection());
+
+        shader->SetUniform3f("u_ViewPosition", m_Camera->GetPosition());
+
 		glDrawElements(GL_TRIANGLES, mesh->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 
 		mesh->Unbind();

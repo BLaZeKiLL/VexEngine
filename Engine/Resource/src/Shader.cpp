@@ -24,15 +24,40 @@ namespace VEX
 		glUseProgram(0);
 	}
 
-	void Shader::SetUniform1i(const std::string& name, const glm::ivec1 value)
+	void Shader::SetUniform1i(const std::string& name, const int value)
 	{
-		glUniform1i(GetUniformLocation(name), value.x);
+		glUniform1i(GetUniformLocation(name), value);
 	}
 
-	void Shader::SetUniform1f(const std::string& name, const glm::vec1 value)
-	{
-		glUniform1f(GetUniformLocation(name), value.x);
-	}
+    void Shader::SetUniform2i(const std::string &name, const glm::ivec2 value)
+    {
+        glUniform2i(GetUniformLocation(name), value.x, value.y);
+    }
+
+    void Shader::SetUniform3i(const std::string &name, const glm::ivec3 value)
+    {
+        glUniform3i(GetUniformLocation(name), value.x, value.y, value.z);
+    }
+
+    void Shader::SetUniform4i(const std::string &name, const glm::ivec4 value)
+    {
+        glUniform4i(GetUniformLocation(name), value.x, value.y, value.z, value.w);
+    }
+
+    void Shader::SetUniform1f(const std::string& name, const float value)
+    {
+        glUniform1f(GetUniformLocation(name), value);
+    }
+
+    void Shader::SetUniform2f(const std::string &name, const glm::vec2 value)
+    {
+        glUniform2f(GetUniformLocation(name), value.x, value.y);
+    }
+
+    void Shader::SetUniform3f(const std::string &name, const glm::vec3 value)
+    {
+        glUniform3f(GetUniformLocation(name), value.x, value.y, value.z);
+    }
 
 	void Shader::SetUniform4f(const std::string& name, const glm::vec4 value)
 	{

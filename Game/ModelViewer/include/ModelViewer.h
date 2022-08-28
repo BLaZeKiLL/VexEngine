@@ -15,22 +15,23 @@ namespace VEX
 }
 
 class CameraController;
-struct Vertex;
+
+class TransformData;
+class LightData;
+class MaterialData;
 
 class ModelViewer final : public VEX::Game
 {
 private:
-    CameraController* m_CameraController;
-
 	VEX::Shader* m_Shader;
 	VEX::Texture* m_Texture;
 	VEX::Mesh* m_Mesh;
 
-	glm::mat4 m_Transform;
+    CameraController* m_CameraController;
 
-	glm::vec3 m_Position;
-    glm::vec3 m_Axis;
-    float m_Rotation;
+    TransformData* m_TransformData;
+    LightData* m_LightData;
+    MaterialData* m_MaterialData;
 
 public:
 	ModelViewer();
@@ -46,6 +47,7 @@ protected:
 private:
     void RenderUI();
     void SetupShader();
+    void UpdateShader();
     void SetupModel();
 };
 

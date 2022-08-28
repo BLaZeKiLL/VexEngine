@@ -18,6 +18,8 @@ namespace VEX
 		}
 
 		glfwDefaultWindowHints();
+
+        glfwWindowHint(GLFW_MAXIMIZED, m_Config.Maximized);
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

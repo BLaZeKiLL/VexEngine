@@ -15,4 +15,5 @@ public:
     CameraController(float speed, float sensitivity);
 
     void ProcessInput(const VEX::Window* window, VEX::Camera* camera) const;
+    void RenderUI();
 };

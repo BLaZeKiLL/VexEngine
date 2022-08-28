@@ -35,3 +35,11 @@ void CameraController::ProcessInput(const VEX::Window *window, VEX::Camera *came
         camera->LookReset();
     }
 }
+
+void CameraController::RenderUI()
+{
+    if (ImGui::CollapsingHeader("Camera")) {
+        ImGui::SliderFloat("Speed", &m_Speed, 1.0f, 10.0f);
+        ImGui::SliderFloat("Sensitivity", &m_Sensitivity, 0.01f, 1.0f);
+    }
+}
