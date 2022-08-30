@@ -10,12 +10,11 @@ out vec3 v_normal;
 out vec3 v_position;
 
 uniform mat4 u_Model;
-uniform mat4 u_View;
-uniform mat4 u_Projection;
+uniform mat4 u_ViewProjection;
 
 void main()
 {
-	gl_Position = u_Projection * u_View * u_Model * vec4(position, 1.0);
+	gl_Position = u_ViewProjection * u_Model * vec4(position, 1.0);
 	v_uv = uv;
 	v_normal = mat3(transpose(inverse(u_Model))) * normal; // matrix computation should be moved to CPU
 	v_position = vec3(u_Model * vec4(position, 1.0));

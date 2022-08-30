@@ -27,8 +27,7 @@ namespace VEX
 		mesh->Bind();
 
 		shader->SetUniformMat4f("u_Model", transform);
-		shader->SetUniformMat4f("u_View", m_Camera->GetView());
-		shader->SetUniformMat4f("u_Projection", m_Camera->GetProjection());
+		shader->SetUniformMat4f("u_ViewProjection", m_Camera->GetViewProjection());
 
         shader->SetUniform3f("u_ViewPosition", m_Camera->GetPosition());
 

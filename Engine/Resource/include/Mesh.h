@@ -18,6 +18,7 @@ namespace VEX
 		VertexBuffer* m_VB;
 		IndexBuffer* m_IB;
 		VertexArray* m_VA;
+
 	public:
 		Mesh(VertexBufferLayout& layout, const void* vertices, unsigned int vcount, const unsigned int* indices, unsigned int icount);
 		~Mesh();
@@ -25,7 +26,8 @@ namespace VEX
 		void Bind() const;
 		void Unbind() const;
 
-		inline unsigned int GetVertexSize() const { return m_VertexCount; }
-		inline unsigned int GetIndexCount() const { return m_IndexCount; }
+		inline const unsigned int GetVertexSize() const { return m_VertexCount; }
+		inline const unsigned int GetIndexCount() const { return m_IndexCount; }
+
 	};
 }

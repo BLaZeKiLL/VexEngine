@@ -49,8 +49,7 @@ namespace VEX
 		~Camera();
 
         inline const glm::vec3& GetPosition() const { return m_Position; }
-		inline const glm::mat4& GetView() const { return m_View; }
-		inline const glm::mat4& GetProjection() const { return m_Projection; }
+		inline const glm::mat4 GetViewProjection() const { return m_Projection * m_View; }
 
         void Move(CameraMovement direction, float speed);
         void Look(float x, float y, float sensitivity, bool constrain = true);
