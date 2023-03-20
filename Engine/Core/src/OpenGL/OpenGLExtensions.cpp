@@ -1,7 +1,7 @@
 #include "Vex/Vendor.h"
 
 #include "Logger.h"
-#include "OpenGL/OpenGL.h"
+#include "OpenGL/OpenGLExtensions.h"
 
 bool VEX::InitializeOpenGL(GLFWwindow* window)
 {
@@ -13,7 +13,10 @@ bool VEX::InitializeOpenGL(GLFWwindow* window)
 
 	// Error Handling
 	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(MessageCallback, nullptr);
+
+#ifdef VEX_WINDOWS // Debug message call back is only supported on OpenGl 4.3+
+    glDebugMessageCallback(MessageCallback, nullptr);
+#endif
 
 	// Blending
 	glEnable(GL_BLEND);
@@ -24,7 +27,7 @@ bool VEX::InitializeOpenGL(GLFWwindow* window)
 
 	glfwSetFramebufferSizeCallback(window, ResizeCallback);
 
-	VEX_LOG_INFO("OpenGL 4.5 Initialized");
+	VEX_LOG_INFO("OpenGL Initialized");
 
 	return true;
 }

@@ -15,3 +15,11 @@ target_include_directories(VEX_CORE PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 target_include_directories(VEX_CORE INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
 target_link_libraries(VEX_CORE PUBLIC VEX_VENDOR)
+
+if (WIN32)
+    target_compile_definitions(VEX_CORE PUBLIC VEX_WINDOWS)
+endif()
+
+if (UNIX)
+    target_compile_definitions(VEX_CORE PUBLIC VEX_OSX)
+endif()

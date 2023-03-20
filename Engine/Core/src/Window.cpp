@@ -5,12 +5,18 @@
 
 #include "Window.h"
 #include "Logger.h"
-#include "OpenGL/OpenGL.h"
+#include "OpenGL/OpenGLExtensions.h"
 
 namespace VEX
 {
 	Window::Window(const WindowConfig& Config) : m_Config(Config)
 	{
+#ifdef VEX_WINDOWS
+        VEX_LOG_INFO("OS : Windows");
+#elifdef VEX_OSX
+        VEX_LOG_INFO("OS : OSX");
+#endif
+
 		if (!glfwInit())
 		{
 			VEX_LOG_ERROR("GLFW Failed To Initialize");
@@ -22,10 +28,19 @@ namespace VEX
         glfwWindowHint(GLFW_MAXIMIZED, m_Config.Maximized);
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+
+#ifdef VEX_WINDOWS
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+#endif
+
+#ifdef VEX_OSX
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+#endif
+
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		m_Window = glfwCreateWindow(
 			m_Config.Width,
@@ -51,7 +66,12 @@ namespace VEX
 		ImGui::StyleColorsDark();
 
 		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-		ImGui_ImplOpenGL3_Init("#version 450");
+
+#ifdef VEX_WINDOWS
+        ImGui_ImplOpenGL3_Init("#version 450");
+#elifdef VEX_OSX
+        ImGui_ImplOpenGL3_Init("#version 410");
+#endif
 
 		InitializeOpenGL(m_Window);
 	}
