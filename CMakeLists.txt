@@ -14,7 +14,6 @@ endif ()
 
 # VCPKG Config
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/.vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
 
 # Project Config
 project ("VexEngine" VERSION 0.1.0)

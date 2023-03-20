@@ -7,11 +7,13 @@ add_custom_command(
 	"${CMAKE_CURRENT_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:ModelViewer>/assets"
 )
 
-if (CMAKE_BUILD_TYPE MATCHES "Debug")
-    target_compile_options(ModelViewer PUBLIC /MTd)
-else()
-    target_compile_options(ModelViewer PUBLIC /MT)
-endif()
+if (WIN32)
+    if (CMAKE_BUILD_TYPE MATCHES "Debug")
+        target_compile_options(ModelViewer PUBLIC /MTd)
+    else()
+        target_compile_options(ModelViewer PUBLIC /MT)
+    endif()
+endif ()
 
 target_include_directories(ModelViewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 

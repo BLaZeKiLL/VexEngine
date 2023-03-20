@@ -2,8 +2,8 @@
 	"version": 2,
 	"configurePresets": [
 		{
-			"name": "base",
-			"description": "Base config",
+			"name": "base-x64-windows",
+			"description": "Windows base config",
 			"hidden": true,
 			"generator": "Ninja",
 			"binaryDir": "${sourceDir}/out/build/${presetName}",
@@ -14,7 +14,8 @@
 			"cacheVariables": {
 				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
 				"CMAKE_C_COMPILER": "clang-cl",
-				"CMAKE_CXX_COMPILER": "clang-cl"
+				"CMAKE_CXX_COMPILER": "clang-cl",
+				"VCPKG_TARGET_TRIPLET": "x64-windows-static"
 			},
 			"vendor": {
 				"microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -29,19 +30,61 @@
 			}
 		},
 		{
-			"name": "x64-Debug-Clang",
+			"name": "base-arm64-osx",
+			"description": "OSX base config",
+			"hidden": true,
+			"generator": "Ninja",
+			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"cacheVariables": {
+				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+				"CMAKE_C_COMPILER": "clang",
+				"CMAKE_CXX_COMPILER": "clang++",
+				"VCPKG_TARGET_TRIPLET": "arm64-osx"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"intelliSenseMode": "windows-clang-x64",
+					"hostOS": [
+						"Windows"
+					]
+				},
+				"jetbrains.com/clion": {
+					"toolchain": "Clang"
+				}
+			}
+		},
+		{
+			"name": "x64-windows-debug",
 			"displayName": "Windows Clang x64 Debug",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base",
+			"inherits": "base-x64-windows",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
-			"name": "x64-Release-Clang",
+			"name": "x64-windows-release",
 			"displayName": "Windows Clang x64 Release",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base",
+			"inherits": "base-x64-windows",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "arm64-osx-debug",
+			"displayName": "OSX Clang x64 Debug",
+			"description": "Target Windows with the Clang.",
+			"inherits": "base-arm64-osx",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug"
+			}
+		},
+		{
+			"name": "arm64-osx-release",
+			"displayName": "OSX Clang x64 Release",
+			"description": "Target Windows with the Clang.",
+			"inherits": "base-arm64-osx",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release"
 			}
@@ -49,14 +92,24 @@
 	],
 	"buildPresets": [
 		{
-			"name": "Debug",
-			"description": "Debug build project using clang",
-			"configurePreset": "x64-Debug-Clang"
+			"name": "windows-debug",
+			"description": "Windows debug build project using clang",
+			"configurePreset": "x64-windows-debug"
 		},
 		{
-			"name": "Release",
-			"description": "Release build project using clang",
-			"configurePreset": "x64-Release-Clang"
+			"name": "windows-release",
+			"description": "Windows release build project using clang",
+			"configurePreset": "x64-windows-release"
+		},
+		{
+			"name": "osx-debug",
+			"description": "Osx debug build project using clang",
+			"configurePreset": "arm64-osx-debug"
+		},
+		{
+			"name": "osx-release",
+			"description": "Osx release build project using clang",
+			"configurePreset": "arm64-osx-release"
 		}
 	]
 }

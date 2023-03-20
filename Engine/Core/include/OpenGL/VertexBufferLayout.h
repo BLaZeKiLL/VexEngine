@@ -25,7 +25,7 @@ namespace VEX
 		inline const std::vector<VertexBufferElement>& GetElements() const { return m_Elements; }
 
 		template<typename T>
-		void Push(unsigned int count) { static_assert(false); }
+		void Push(unsigned int count) { static_assert(true, "This function is not implemented"); }
 
 		template<>
 		void Push<float>(unsigned int count);
