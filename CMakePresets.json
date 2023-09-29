@@ -2,7 +2,7 @@
 	"version": 2,
 	"configurePresets": [
 		{
-			"name": "base-x64-windows",
+			"name": "base-x64-windows-config",
 			"description": "Windows base config",
 			"hidden": true,
 			"generator": "Ninja",
@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"name": "base-arm64-osx",
+			"name": "base-arm64-osx-config",
 			"description": "OSX base config",
 			"hidden": true,
 			"generator": "Ninja",
@@ -54,37 +54,37 @@
 			}
 		},
 		{
-			"name": "x64-windows-debug",
+			"name": "x64-windows-debug-config",
 			"displayName": "Windows Clang x64 Debug",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base-x64-windows",
+			"inherits": "base-x64-windows-config",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
-			"name": "x64-windows-release",
+			"name": "x64-windows-release-config",
 			"displayName": "Windows Clang x64 Release",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base-x64-windows",
+			"inherits": "base-x64-windows-config",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release"
 			}
 		},
 		{
-			"name": "arm64-osx-debug",
+			"name": "arm64-osx-debug-config",
 			"displayName": "OSX Clang x64 Debug",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base-arm64-osx",
+			"inherits": "base-arm64-osx-config",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
-			"name": "arm64-osx-release",
+			"name": "arm64-osx-release-config",
 			"displayName": "OSX Clang x64 Release",
 			"description": "Target Windows with the Clang.",
-			"inherits": "base-arm64-osx",
+			"inherits": "base-arm64-osx-config",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release"
 			}
@@ -92,24 +92,24 @@
 	],
 	"buildPresets": [
 		{
-			"name": "windows-debug",
+			"name": "windows-debug-build",
 			"description": "Windows debug build project using clang",
-			"configurePreset": "x64-windows-debug"
+			"configurePreset": "x64-windows-debug-config"
 		},
 		{
-			"name": "windows-release",
+			"name": "windows-release-build",
 			"description": "Windows release build project using clang",
-			"configurePreset": "x64-windows-release"
+			"configurePreset": "x64-windows-release-config"
 		},
 		{
-			"name": "osx-debug",
+			"name": "osx-debug-build",
 			"description": "Osx debug build project using clang",
-			"configurePreset": "arm64-osx-debug"
+			"configurePreset": "arm64-osx-debug-config"
 		},
 		{
-			"name": "osx-release",
+			"name": "osx-release-build",
 			"description": "Osx release build project using clang",
-			"configurePreset": "arm64-osx-release"
+			"configurePreset": "arm64-osx-release-config"
 		}
 	]
 }
