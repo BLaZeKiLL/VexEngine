@@ -11,9 +11,9 @@ namespace VEX
 {
 	Window::Window(const WindowConfig& Config) : m_Config(Config)
 	{
-#ifdef VEX_WINDOWS
+#if defined(VEX_WINDOWS)
         VEX_LOG_INFO("OS : Windows");
-#elifdef VEX_OSX
+#elif defined(VEX_OSX)
         VEX_LOG_INFO("OS : OSX");
 #endif
 
@@ -67,9 +67,9 @@ namespace VEX
 
 		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
 
-#ifdef VEX_WINDOWS
+#if defined(VEX_WINDOWS)
         ImGui_ImplOpenGL3_Init("#version 450");
-#elifdef VEX_OSX
+#elif defined(VEX_OSX)
         ImGui_ImplOpenGL3_Init("#version 410");
 #endif
 

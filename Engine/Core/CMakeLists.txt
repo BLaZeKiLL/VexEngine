@@ -4,9 +4,9 @@ add_library(VEX_CORE ${VEX_CORE_SOURCES})
 
 if (WIN32)
     if (CMAKE_BUILD_TYPE MATCHES "Debug")
-        target_compile_options(ModelViewer PUBLIC /MTd)
+        target_compile_options(VEX_CORE PUBLIC /MTd)
     else()
-        target_compile_options(ModelViewer PUBLIC /MT)
+        target_compile_options(VEX_CORE PUBLIC /MT)
     endif()
 endif ()
 

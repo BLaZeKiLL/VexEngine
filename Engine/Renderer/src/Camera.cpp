@@ -5,14 +5,14 @@
 namespace VEX
 {
 	Camera::Camera(const CameraConfig& config):
-            m_View(glm::mat4(1.0f)),
-            m_Projection(glm::mat4(1.0f)),
-            m_Position(glm::vec3(0.0f, 0.0f, 0.0f)),
-            m_Pitch(0.0f),
-            m_Yaw(-90.0f),
-            m_XLast(config.Width / 2),
-            m_YLast(config.Height / 2),
-            m_FirstMouse(true)
+		m_Projection(glm::mat4(1.0f)),
+		m_View(glm::mat4(1.0f)),
+		m_Position(glm::vec3(0.0f, 0.0f, 0.0f)),
+		m_Yaw(-90.0f),
+		m_Pitch(0.0f),
+		m_XLast(config.Width / 2),
+		m_YLast(config.Height / 2),
+		m_FirstMouse(true)
 	{
 		switch (config.Projection)
 		{
