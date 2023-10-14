@@ -1,18 +1,26 @@
 {
-	"version": 2,
+	"version": 3,
 	"configurePresets": [
+		{
+			"name": "base",
+			"hidden": true,
+			"description": "Base congfig",
+			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"generator": "Ninja",
+			"cacheVariables": {
+				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+			}
+		},
 		{
 			"name": "base-x64-windows-config",
 			"description": "Windows base config",
+			"inherits": "base",
 			"hidden": true,
-			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/out/build/${presetName}",
 			"architecture": {
 				"value": "x64",
 				"strategy": "external"
 			},
 			"cacheVariables": {
-				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
 				"CMAKE_C_COMPILER": "clang-cl",
 				"CMAKE_CXX_COMPILER": "clang-cl",
 				"VCPKG_TARGET_TRIPLET": "x64-windows-static"
@@ -20,6 +28,7 @@
 			"vendor": {
 				"microsoft.com/VisualStudioSettings/CMake/1.0": {
 					"intelliSenseMode": "windows-clang-x64",
+					"enableClangTidyCodeAnalysis": true,
 					"hostOS": [
 						"Windows"
 					]
@@ -27,30 +36,36 @@
 				"jetbrains.com/clion": {
 					"toolchain": "Clang"
 				}
+			},
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
 			}
 		},
 		{
 			"name": "base-arm64-osx-config",
 			"description": "OSX base config",
+			"inherits": "base",
 			"hidden": true,
-			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/out/build/${presetName}",
+			"architecture": {
+				"value": "arm64",
+				"strategy": "external"
+			},
 			"cacheVariables": {
-				"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
 				"CMAKE_C_COMPILER": "clang",
 				"CMAKE_CXX_COMPILER": "clang++",
 				"VCPKG_TARGET_TRIPLET": "arm64-osx"
 			},
 			"vendor": {
-				"microsoft.com/VisualStudioSettings/CMake/1.0": {
-					"intelliSenseMode": "windows-clang-x64",
-					"hostOS": [
-						"Windows"
-					]
-				},
 				"jetbrains.com/clion": {
 					"toolchain": "Clang"
 				}
+			},
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Darwin"
 			}
 		},
 		{
@@ -92,22 +107,22 @@
 	],
 	"buildPresets": [
 		{
-			"name": "windows-debug-build",
+			"name": "x64-windows-debug",
 			"description": "Windows debug build project using clang",
 			"configurePreset": "x64-windows-debug-config"
 		},
 		{
-			"name": "windows-release-build",
+			"name": "x64-windows-release",
 			"description": "Windows release build project using clang",
 			"configurePreset": "x64-windows-release-config"
 		},
 		{
-			"name": "osx-debug-build",
+			"name": "arm64-osx-debug",
 			"description": "Osx debug build project using clang",
 			"configurePreset": "arm64-osx-debug-config"
 		},
 		{
-			"name": "osx-release-build",
+			"name": "arm64-osx-release",
 			"description": "Osx release build project using clang",
 			"configurePreset": "arm64-osx-release-config"
 		}
